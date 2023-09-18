@@ -1,0 +1,26 @@
+{
+  "songs": [
+    {
+      "name": "song1",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "sing",
+        "password": "sing",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    },
+    {
+      "name": "song2",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "sing",
+        "password": "sing",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    }
+  ]
+}

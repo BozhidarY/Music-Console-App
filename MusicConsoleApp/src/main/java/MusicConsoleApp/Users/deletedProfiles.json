@@ -1,0 +1,49 @@
+{
+  "usersList": [
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p1",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "Like playlist",
+            "songPlaylist": [
+              {
+                "name": "song1",
+                "artist": {
+                  "monthlyListeners": 0,
+                  "username": "sing",
+                  "password": "sing",
+                  "userType": "ARTIST"
+                },
+                "duration": "0:05",
+                "liked": true
+              },
+              {
+                "name": "song2",
+                "artist": {
+                  "monthlyListeners": 0,
+                  "username": "sing",
+                  "password": "sing",
+                  "userType": "ARTIST"
+                },
+                "duration": "0:05",
+                "liked": true
+              }
+            ]
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "boj",
+      "userType": "CLIENT"
+    }
+  ]
+}
