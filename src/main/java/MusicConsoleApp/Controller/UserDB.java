@@ -1,4 +1,6 @@
-package MusicConsoleApp.Users;
+package MusicConsoleApp.Controller;
+
+import MusicConsoleApp.Models.Users;
 
 import java.util.ArrayList;
 import java.util.List;

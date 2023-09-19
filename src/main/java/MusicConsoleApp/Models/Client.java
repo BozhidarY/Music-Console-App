@@ -1,7 +1,4 @@
-package MusicConsoleApp.Users;
-
-import MusicConsoleApp.Librarys.Library;
-import MusicConsoleApp.Librarys.Playlists;
+package MusicConsoleApp.Models;
 
 public class Client extends Users {
 

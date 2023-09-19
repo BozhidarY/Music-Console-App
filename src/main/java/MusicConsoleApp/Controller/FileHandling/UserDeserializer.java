@@ -1,12 +1,12 @@
-package MusicConsoleApp.UsersEngine;
+package MusicConsoleApp.Controller.FileHandling;
 
-import MusicConsoleApp.Librarys.Library;
-import MusicConsoleApp.Librarys.Playlists;
-import MusicConsoleApp.Songs.Songs;
-import MusicConsoleApp.Users.Artist;
-import MusicConsoleApp.Users.Client;
-import MusicConsoleApp.Users.UserType;
-import MusicConsoleApp.Users.Users;
+import MusicConsoleApp.Models.Library;
+import MusicConsoleApp.Models.Playlists;
+import MusicConsoleApp.Models.Songs;
+import MusicConsoleApp.Models.Artist;
+import MusicConsoleApp.Models.Client;
+import MusicConsoleApp.Models.UserType;
+import MusicConsoleApp.Models.Users;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -21,7 +21,6 @@ public class UserDeserializer implements JsonDeserializer<Users> {
         String username = jsonObject.get("username").getAsString();
         String password = jsonObject.get("password").getAsString();
         UserType userType = UserType.valueOf(jsonObject.get("userType").getAsString());
-
 
         Users users = null;
 

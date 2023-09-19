@@ -1,4 +1,4 @@
-package MusicConsoleApp.Users;
+package MusicConsoleApp.Models;
 
 public class Admin extends Users {
 

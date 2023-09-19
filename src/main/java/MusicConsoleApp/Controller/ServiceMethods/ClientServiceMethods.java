@@ -1,10 +1,10 @@
-package MusicConsoleApp.CommunicationEngine;
+package MusicConsoleApp.Controller.ServiceMethods;
 
-import MusicConsoleApp.Librarys.Playlists;
-import MusicConsoleApp.Songs.SongData;
-import MusicConsoleApp.Songs.Songs;
-import MusicConsoleApp.Users.Client;
-import MusicConsoleApp.Users.UserDB;
+import MusicConsoleApp.Controller.SongData;
+import MusicConsoleApp.Controller.UserDB;
+import MusicConsoleApp.Models.Playlists;
+import MusicConsoleApp.Models.Songs;
+import MusicConsoleApp.Models.Client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ClientCommunicationMethods {
+public class ClientServiceMethods {
     Scanner scanner = new Scanner(System.in);
-    Stopwatch stopwatch = new Stopwatch();
+    SongRemainingTime songRemainingTime = new SongRemainingTime();
 
     public void openMessage(Client client) {
         System.out.println("Welcome " + client.getUsername() + ". There re 3 modes to operate in this app.\nThe first mode is that" +
@@ -44,7 +44,7 @@ public class ClientCommunicationMethods {
         for (Songs song : filteredSongs) {
             if (song.getName().equals(choiceSong)) {
                 System.out.println("You re listening");
-                stopwatch.stopwatch(song, scanner);
+                songRemainingTime.stopwatch(song, scanner);
                 likeSong(client, song);
             }
         }
@@ -57,7 +57,7 @@ public class ClientCommunicationMethods {
         if (likeChoice.equals("Y")) {
             for (Playlists playlists : client.getLibrary().getLibraryList()) {
                 if (playlists.getPlaylistName().equals("Like playlist")) {
-                    song.setLiked(true);
+//                    song.setLiked(true);
                     playlists.getSongPlaylist().add(song);
                     result = true;
                 }
@@ -65,11 +65,11 @@ public class ClientCommunicationMethods {
             if (!result) {
                 Playlists playlists = new Playlists("Like playlist");
                 client.getLibrary().getLibraryList().add(playlists);
-                song.setLiked(true);
+//                song.setLiked(true);
                 playlists.getSongPlaylist().add(song);
             }
         } else if (likeChoice.equals("N")) {
-            song.setLiked(false);
+//            song.setLiked(false);
             for (Playlists playlists : client.getLibrary().getLibraryList()) {
                 if (playlists.getPlaylistName().equals("Like playlist")) {
                     playlists.getSongPlaylist().remove(song);
@@ -84,7 +84,7 @@ public class ClientCommunicationMethods {
         int randomIndex = random.nextInt(songData.getSongsList().size());
         Songs currentSong = songData.getSongsList().get(randomIndex);
         System.out.println("Now listening to " + currentSong.getName());
-        stopwatch.stopwatch(currentSong, scanner);
+        songRemainingTime.stopwatch(currentSong, scanner);
         likeSong(client, currentSong);
     }
 
@@ -102,7 +102,7 @@ public class ClientCommunicationMethods {
                 playlists.getSongPlaylist().forEach(songs -> {
                     if (songs.getName().equals(choiceSong2)) {
                         System.out.println("You re listening");
-                        stopwatch.stopwatch(songs, scanner);
+                        songRemainingTime.stopwatch(songs, scanner);
                         likeSong(client, songs);
                     }
                 });

@@ -1,0 +1,59 @@
+{
+  "songs": [
+    {
+      "name": "song1",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "sing",
+        "password": "sing",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    },
+    {
+      "name": "song2",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "sing",
+        "password": "sing",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    },
+    {
+      "name": "",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "dasdad",
+        "password": "adfsaf",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    },
+    {
+      "name": "",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "sadfsd",
+        "password": "fsdfsdf",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    },
+    {
+      "name": "",
+      "artist": {
+        "monthlyListeners": 0,
+        "username": "dsfdfsf",
+        "password": "1243214",
+        "userType": "ARTIST"
+      },
+      "duration": "0:05",
+      "liked": false
+    }
+  ]
+}

@@ -1,10 +1,10 @@
-package MusicConsoleApp.Users;
+package MusicConsoleApp.Models;
+
+import MusicConsoleApp.Exceptions.WrongCredentialsException;
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Users {
-    public static final String USERS_JSON_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\MusicConsoleApp\\Users\\users.json";
 
-    public static final String DELETEDUSERS_JSON_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\MusicConsoleApp\\Users\\deletedProfiles.json";
     private String username;
     private String password;
     private UserType userType;
@@ -19,7 +19,7 @@ public abstract class Users {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username) throws WrongCredentialsException {
         this.username = username;
     }
 

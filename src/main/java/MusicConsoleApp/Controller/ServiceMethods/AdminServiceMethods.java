@@ -1,15 +1,16 @@
-package MusicConsoleApp.CommunicationEngine;
+package MusicConsoleApp.Controller.ServiceMethods;
 
-import MusicConsoleApp.Users.Admin;
-import MusicConsoleApp.Users.UserDB;
-import MusicConsoleApp.Users.Users;
-import MusicConsoleApp.UsersEngine.LoadSaveUsersToJson;
+import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
+import MusicConsoleApp.Controller.UserDB;
+import MusicConsoleApp.Models.Admin;
+import MusicConsoleApp.Models.Constants;
+import MusicConsoleApp.Models.Users;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AdminCommunicationMethods {
+public class AdminServiceMethods {
     Scanner scanner = new Scanner(System.in);
     LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
 
@@ -28,12 +29,12 @@ public class AdminCommunicationMethods {
             }
         });
         userDB.getUsersList().removeAll(removedAccounts);
-        loadSaveUsersToJson.saveUsers(Users.DELETEDUSERS_JSON_PATH, userDB1);
+        loadSaveUsersToJson.saveUsers(Constants.DELETEDUSERS_JSON_PATH, userDB1);
     }
 
     public void recoverAccount(Admin admin, UserDB userDB) {
         UserDB userDB1;
-        userDB1 = loadSaveUsersToJson.loadUsers(Users.DELETEDUSERS_JSON_PATH);
+        userDB1 = loadSaveUsersToJson.loadUsers(Constants.DELETEDUSERS_JSON_PATH);
         System.out.println("Enter the name of the account you want to recover");
         String nameAcc = scanner.nextLine();
         for (Users user : userDB1.getUsersList()) {

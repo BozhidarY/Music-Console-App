@@ -1,10 +1,10 @@
-package MusicConsoleApp.CommunicationEngine;
+package MusicConsoleApp.Controller.ServiceMethods;
 
-import MusicConsoleApp.Songs.Songs;
+import MusicConsoleApp.Models.Songs;
 
 import java.util.Scanner;
 
-public class Stopwatch {
+public class SongRemainingTime {
 
     public int converSongDuration(Songs songs) {
         String[] parts = songs.getDuration().split(":");

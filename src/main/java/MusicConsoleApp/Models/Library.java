@@ -1,4 +1,4 @@
-package MusicConsoleApp.Librarys;
+package MusicConsoleApp.Models;
 
 import java.util.ArrayList;
 import java.util.List;

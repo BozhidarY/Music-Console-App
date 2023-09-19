@@ -1,10 +1,11 @@
 package MusicConsoleApp;
 
 
-import MusicConsoleApp.Users.UserDB;
-import MusicConsoleApp.Users.Users;
-import MusicConsoleApp.UsersEngine.LoadSaveUsersToJson;
-import MusicConsoleApp.UsersEngine.LoginRegisterMenu;
+import MusicConsoleApp.Controller.UserDB;
+import MusicConsoleApp.Models.Constants;
+import MusicConsoleApp.Models.Users;
+import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
+import MusicConsoleApp.View.LoginRegisterMenu;
 
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         UserDB userDB;
-        userDB = loadSaveUsersToJson.loadUsers(Users.USERS_JSON_PATH);
+        userDB = loadSaveUsersToJson.loadUsers(Constants.USERS_JSON_PATH);
 
         System.out.println("Login/Register");
         String choice = scanner.nextLine();
@@ -26,6 +27,8 @@ public class Main {
             case "Register" -> loginRegisterMenu.register(userDB);
         }
 
-        loadSaveUsersToJson.saveUsers(Users.USERS_JSON_PATH, userDB);
+        loadSaveUsersToJson.saveUsers(Constants.USERS_JSON_PATH, userDB);
+
+//        System.out.println(System.getProperty("user.dir"));
     }
 }

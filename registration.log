@@ -1,0 +1,43 @@
+2023-09-19 16:37:40,595 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:37:45,913 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 16:37:47,118 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:40:32,438 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Users/uers.json
+2023-09-19 16:40:38,149 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:40:41,257 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 16:40:42,721 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Users/uers.json
+2023-09-19 16:48:44,218 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:49:28,462 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:49:45,298 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:50:30,383 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:51:06,834 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:51:11,632 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 16:51:13,025 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to save in file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:51:55,969 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:52:02,330 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:52:08,232 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 16:52:09,409 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to save in file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:53:11,488 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:53:16,058 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:53:19,000 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 16:53:20,321 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to save in file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:54:04,030 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:54:21,891 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:54:33,138 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User registered successfully: username=Test as CLIENT
+2023-09-19 16:54:36,041 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to save in file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:54:36,056 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:54:50,456 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:54:56,490 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:55:03,112 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=Test
+2023-09-19 16:55:04,289 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to save in file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:55:04,301 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:56:19,008 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 16:56:33,994 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Users/users.json
+2023-09-19 16:56:49,682 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 17:23:56,566 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 17:25:22,326 [main] ERROR MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Uses/users.json
+2023-09-19 17:26:28,711 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-09-19 17:26:35,728 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 17:26:37,703 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-09-19 17:46:26,785 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-09-19 17:46:36,384 [main] INFO  MusicConsoleApp.View.LoginRegisterMenu - User has loggined: username=boj
+2023-09-19 17:46:57,342 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json

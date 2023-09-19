@@ -1,27 +1,27 @@
-package MusicConsoleApp.CommunicationEngine;
+package MusicConsoleApp.View;
 
-import MusicConsoleApp.Songs.LoadSongs;
-import MusicConsoleApp.Songs.SongData;
-import MusicConsoleApp.Songs.Songs;
-import MusicConsoleApp.Users.Admin;
-import MusicConsoleApp.Users.Artist;
-import MusicConsoleApp.Users.Client;
-import MusicConsoleApp.Users.UserDB;
+import MusicConsoleApp.Controller.ServiceMethods.AdminServiceMethods;
+import MusicConsoleApp.Controller.ServiceMethods.ArtistServiceMethods;
+import MusicConsoleApp.Controller.ServiceMethods.ClientServiceMethods;
+import MusicConsoleApp.Controller.FileHandling.LoadSongs;
+import MusicConsoleApp.Controller.SongData;
+import MusicConsoleApp.Models.*;
+import MusicConsoleApp.Controller.UserDB;
 
 import java.util.Scanner;
 
-public class UserCommunication {
+public class UserService {
     Scanner scanner = new Scanner(System.in);
     LoadSongs loadSongs = new LoadSongs();
     SongData songData = new SongData();
-    ClientCommunicationMethods clientCommunicationMethods = new ClientCommunicationMethods();
-    ArtistCommunicationMethods artistCommunicationMethods = new ArtistCommunicationMethods();
-    AdminCommunicationMethods adminCommunicationMethods = new AdminCommunicationMethods();
+    ClientServiceMethods clientServiceMethods = new ClientServiceMethods();
+    ArtistServiceMethods artistServiceMethods = new ArtistServiceMethods();
+    AdminServiceMethods adminServiceMethods = new AdminServiceMethods();
 
     public void openClientCommunication(Client client, UserDB userDB) {
-        songData = loadSongs.loadFromFile(Songs.SONG_JSON_PATH);
+        songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
 
-        clientCommunicationMethods.openMessage(client);
+        clientServiceMethods.openMessage(client);
 
         String choice = scanner.nextLine();
         while (!choice.equals("Exit")) {
@@ -31,9 +31,9 @@ public class UserCommunication {
                     System.out.println("List of commands: Search/Random/Playlist");
                     String listenChoice = scanner.nextLine();
                     switch (listenChoice.toUpperCase()) {
-                        case "SEARCH" -> clientCommunicationMethods.searchBar(client, songData);
-                        case "RANDOM" -> clientCommunicationMethods.randomSong(client, songData);
-                        case "PLAYLIST" -> clientCommunicationMethods.playlistListen(client);
+                        case "SEARCH" -> clientServiceMethods.searchBar(client, songData);
+                        case "RANDOM" -> clientServiceMethods.randomSong(client, songData);
+                        case "PLAYLIST" -> clientServiceMethods.playlistListen(client);
                         default -> {
                             System.out.println("Invalid Input");
                         }
@@ -45,16 +45,16 @@ public class UserCommunication {
                     System.out.println("List of commands: AddPlaylist/DeletePlaylist/AddSong/DeleteSong");
                     String choiceEdit = scanner.nextLine();
                     switch (choiceEdit.toUpperCase()) {
-                        case "ADDPLAYLIST" -> clientCommunicationMethods.addPlaylist(client);
-                        case "DELETEPLAYLIST" -> clientCommunicationMethods.deletePlaylist(client);
-                        case "ADDSONG" -> clientCommunicationMethods.addSong(client, songData);
-                        case "DELETESONG" -> clientCommunicationMethods.deleteSong(client);
+                        case "ADDPLAYLIST" -> clientServiceMethods.addPlaylist(client);
+                        case "DELETEPLAYLIST" -> clientServiceMethods.deletePlaylist(client);
+                        case "ADDSONG" -> clientServiceMethods.addSong(client, songData);
+                        case "DELETESONG" -> clientServiceMethods.deleteSong(client);
                         default -> {
                             System.out.println("Invalid Input");
                         }
                     }
                 }
-                case "IMPORT" -> clientCommunicationMethods.importLibrary(client, userDB);
+                case "IMPORT" -> clientServiceMethods.importLibrary(client, userDB);
                 default -> {
                     System.out.println("Invalid Input");
                 }
@@ -68,13 +68,13 @@ public class UserCommunication {
         System.out.println("Do you want to delete or recover account");
         String choice = scanner.nextLine();
         switch (choice) {
-            case "Recover" -> adminCommunicationMethods.recoverAccount(admin, userDB);
-            case "Delete" -> adminCommunicationMethods.deleteAccount(admin, userDB);
+            case "Recover" -> adminServiceMethods.recoverAccount(admin, userDB);
+            case "Delete" -> adminServiceMethods.deleteAccount(admin, userDB);
         }
     }
 
     public void openArtistCommunication(Artist artist) {
-        artistCommunicationMethods.printArtistSongs(songData, artist);
-        artistCommunicationMethods.addSongToJson(songData, artist);
+        artistServiceMethods.printArtistSongs(songData, artist);
+        artistServiceMethods.addSongToJson(songData, artist);
     }
 }

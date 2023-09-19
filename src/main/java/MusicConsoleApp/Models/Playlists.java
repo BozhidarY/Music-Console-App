@@ -1,6 +1,4 @@
-package MusicConsoleApp.Librarys;
-
-import MusicConsoleApp.Songs.Songs;
+package MusicConsoleApp.Models;
 
 import java.util.ArrayList;
 import java.util.List;

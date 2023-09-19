@@ -1,20 +1,18 @@
-package MusicConsoleApp.Songs;
+package MusicConsoleApp.Models;
 
-import MusicConsoleApp.Users.Artist;
+import MusicConsoleApp.Models.Artist;
 
 public class Songs {
-    public static final String SONG_JSON_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\MusicConsoleApp\\Songs\\songsFile.json";
     private String name;
-    //    private Artists artist;
     private Artist artist;
     private String duration;
-    private boolean liked;
+//    private boolean liked;
 
     public Songs(String name, Artist artist) {
         this.name = name;
         this.artist = artist;
         setDuration("0:05");
-        setLiked(false);
+//        setLiked(false);
     }
 
     public String getName() {
@@ -41,19 +39,18 @@ public class Songs {
         this.duration = duration;
     }
 
-    public boolean isLiked() {
-        return liked;
-    }
-
-    public void setLiked(boolean liked) {
-        this.liked = liked;
-    }
+//    public boolean isLiked() {
+//        return liked;
+//    }
+//
+//    public void setLiked(boolean liked) {
+//        this.liked = liked;
+//    }
 
     @Override
     public String toString() {
         return "name='" + name + '\'' +
                 ", artist='" + artist + '\'' +
-                ", duration='" + duration + '\'' +
-                ", liked=" + liked;
+                ", duration='" + duration + '\'';
     }
 }

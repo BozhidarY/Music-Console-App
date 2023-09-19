@@ -28,8 +28,7 @@
                   "password": "sing",
                   "userType": "ARTIST"
                 },
-                "duration": "0:05",
-                "liked": true
+                "duration": "0:05"
               }
             ]
           }
@@ -62,8 +61,7 @@
                   "password": "sing",
                   "userType": "ARTIST"
                 },
-                "duration": "0:05",
-                "liked": true
+                "duration": "0:05"
               }
             ]
           }
@@ -72,6 +70,38 @@
       },
       "username": "boj",
       "password": "boj",
+      "userType": "CLIENT"
+    },
+    {
+      "monthlyListeners": 0,
+      "username": "dasdad",
+      "password": "adfsaf",
+      "userType": "ARTIST"
+    },
+    {
+      "monthlyListeners": 0,
+      "username": "sadfsd",
+      "password": "fsdfsdf",
+      "userType": "ARTIST"
+    },
+    {
+      "monthlyListeners": 0,
+      "username": "dsfdfsf",
+      "password": "1243214",
+      "userType": "ARTIST"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "Test library"
+      },
+      "username": "Test",
+      "password": "12345",
       "userType": "CLIENT"
     }
   ]
