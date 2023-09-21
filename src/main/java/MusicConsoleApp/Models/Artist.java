@@ -2,7 +2,7 @@ package MusicConsoleApp.Models;
 
 public class Artist extends Users {
 
-    private long monthlyListeners = 0;
+    private long totalViews = 0;
 
     //    private List<Songs> songsList;
     public Artist(String username, String password) {
@@ -12,7 +12,7 @@ public class Artist extends Users {
     }
 
     public void listenToSong() {
-        this.monthlyListeners++;
+        this.totalViews++;
     }
 
 //    public List<Songs> getSongsList() {
@@ -23,11 +23,11 @@ public class Artist extends Users {
 //        this.songsList = songsList;
 //    }
 
-    public long getMonthlyListeners() {
-        return monthlyListeners;
+    public long getTotalViews() {
+        return totalViews;
     }
 
-    public void setMonthlyListeners(long monthlyListeners) {
-        this.monthlyListeners = monthlyListeners;
+    public void setTotalViews(long totalViews) {
+        this.totalViews = totalViews;
     }
 }

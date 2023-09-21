@@ -1,9 +1,13 @@
 package MusicConsoleApp.Models;
 
+import java.util.HashMap;
+
 public class Client extends Users {
 
     private Library library;
     private Playlists playlists;
+
+    private HashMap<String, Integer> favouriteArtist;
 
     public Client(String username, String password) {
         super(username, password);
@@ -27,6 +31,14 @@ public class Client extends Users {
 
     public void setPlaylists(Playlists playlists) {
         this.playlists = playlists;
+    }
+
+    public HashMap<String, Integer> getFavouriteArtist() {
+        return favouriteArtist;
+    }
+
+    public void setFavouriteArtist(HashMap<String, Integer> favouriteArtist) {
+        this.favouriteArtist = favouriteArtist;
     }
 
     @Override

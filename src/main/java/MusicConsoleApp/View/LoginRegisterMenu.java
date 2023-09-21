@@ -9,9 +9,11 @@ import MusicConsoleApp.Models.Admin;
 import MusicConsoleApp.Models.Artist;
 import MusicConsoleApp.Models.Client;
 import MusicConsoleApp.Models.Users;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class LoginRegisterMenu {
@@ -31,15 +33,18 @@ public class LoginRegisterMenu {
         String password = scanner.nextLine();
 
         for (Users user : userDB.getUsersList()) {
-            if (user.getUsername().equals(username) && password.equals(user.getPassword())) {
-                if (user instanceof Artist) {
-                    hasLoginOccured = true;
-                    logger.info("User has loggined: username={}", username);
-                    userService.openArtistCommunication((Artist) user);
-                } else if (user instanceof Client) {
-                    hasLoginOccured = true;
-                    logger.info("User has loggined: username={}", username);
-                    userService.openClientCommunication((Client) user, userDB);
+            if (user.getUsername().equals(username)) {
+                BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
+                if(result.verified){
+                    if (user instanceof Artist) {
+                        hasLoginOccured = true;
+                        logger.info("User has loggined: username={}", username);
+                        userService.openArtistCommunication((Artist) user, userDB);
+                    } else if (user instanceof Client) {
+                        hasLoginOccured = true;
+                        logger.info("User has loggined: username={}", username);
+                        userService.openClientCommunication((Client) user, userDB);
+                    }
                 }
             }
         }
@@ -61,6 +66,8 @@ public class LoginRegisterMenu {
             String username = scanner.nextLine();
             System.out.println("Enter password");
             String password = scanner.nextLine();
+            String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
             boolean dublicationCheck = false;
 
             for (Users user : userDB.getUsersList()) {
@@ -74,15 +81,15 @@ public class LoginRegisterMenu {
                 String choice = scanner.nextLine();
                 switch (choice) {
                     case "Artist" -> {
-                        Artist artist = new Artist(username, password);
+                        Artist artist = new Artist(username, hashedPassword);
                         userDB.getUsersList().add(artist);
                         System.out.println("You have registered successfully");
                         logger.info("User registered successfully: username={} as {}", username, artist.getUserType() );
 
-                        userService.openArtistCommunication(artist);
+                        userService.openArtistCommunication(artist, userDB);
                     }
                     case "Client" -> {
-                        Client client = new Client(username, password);
+                        Client client = new Client(username, hashedPassword);
                         userDB.getUsersList().add(client);
                         System.out.println("You have registered successfully");
                         logger.info("User registered successfully: username={} as {}", username, client.getUserType() );

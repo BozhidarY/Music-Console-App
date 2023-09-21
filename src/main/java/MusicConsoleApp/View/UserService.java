@@ -1,5 +1,6 @@
 package MusicConsoleApp.View;
 
+import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.ServiceMethods.AdminServiceMethods;
 import MusicConsoleApp.Controller.ServiceMethods.ArtistServiceMethods;
 import MusicConsoleApp.Controller.ServiceMethods.ClientServiceMethods;
@@ -13,13 +14,13 @@ import java.util.Scanner;
 public class UserService {
     Scanner scanner = new Scanner(System.in);
     LoadSongs loadSongs = new LoadSongs();
-    SongData songData = new SongData();
+    SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
     ClientServiceMethods clientServiceMethods = new ClientServiceMethods();
     ArtistServiceMethods artistServiceMethods = new ArtistServiceMethods();
     AdminServiceMethods adminServiceMethods = new AdminServiceMethods();
 
+
     public void openClientCommunication(Client client, UserDB userDB) {
-        songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
 
         clientServiceMethods.openMessage(client);
 
@@ -31,9 +32,14 @@ public class UserService {
                     System.out.println("List of commands: Search/Random/Playlist");
                     String listenChoice = scanner.nextLine();
                     switch (listenChoice.toUpperCase()) {
-                        case "SEARCH" -> clientServiceMethods.searchBar(client, songData);
+                        case "SEARCH" -> {
+                            clientServiceMethods.searchBar(songData, client, userDB);
+//                            loadSaveUsersToJson.saveUsers(Constants.USERS_JSON_PATH, userDB);
+//                            loadSaveUsersToJson.loadUsers(Constants.USERS_JSON_PATH);
+//                            clientServiceMethods.setDefaultPlaylist(client);
+                        }
                         case "RANDOM" -> clientServiceMethods.randomSong(client, songData);
-                        case "PLAYLIST" -> clientServiceMethods.playlistListen(client);
+                        case "PLAYLIST" -> clientServiceMethods.playlistListen(client, songData);
                         default -> {
                             System.out.println("Invalid Input");
                         }
@@ -58,7 +64,13 @@ public class UserService {
                 default -> {
                     System.out.println("Invalid Input");
                 }
+                case "INBOX" -> {
+                    clientServiceMethods.favouriteArtist(userDB);
+                }
             }
+
+            clientServiceMethods.artistDataChange(songData, userDB);
+            loadSongs.saveSongs(Constants.SONG_JSON_PATH, songData);
             System.out.println("Choose a new mode or exit the programm(Listen, Edit, Import, Exit)");
             choice = scanner.nextLine();
         }
@@ -73,8 +85,9 @@ public class UserService {
         }
     }
 
-    public void openArtistCommunication(Artist artist) {
-        artistServiceMethods.printArtistSongs(songData, artist);
+    public void openArtistCommunication(Artist artist, UserDB userDB) {
+//        artistServiceMethods.printArtistSongs(songData, artist);
+        artistServiceMethods.showMostListened(userDB);
         artistServiceMethods.addSongToJson(songData, artist);
     }
 }

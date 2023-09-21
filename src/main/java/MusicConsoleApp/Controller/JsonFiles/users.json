@@ -1,9 +1,15 @@
 {
   "usersList": [
     {
-      "monthlyListeners": 0,
-      "username": "sing",
-      "password": "sing",
+      "totalViews": 0,
+      "username": "Taylor",
+      "password": "$2a$12$9t.4Q0M89WvboCf6Mqx1feDvRo8msdeYdaSIST/QD5mU4HqOr3hBO",
+      "userType": "ARTIST"
+    },
+    {
+      "totalViews": 0,
+      "username": "Singer2",
+      "password": "$2a$12$n0jGQ5NuHzQCaulff9wXrOEB5nwB0YSf32B/NuwpPpQofLOyhQdD2",
       "userType": "ARTIST"
     },
     {
@@ -12,97 +18,19 @@
           {
             "playlistName": "defaultPlaylist",
             "songPlaylist": []
-          },
-          {
-            "playlistName": "p1",
-            "songPlaylist": []
-          },
-          {
-            "playlistName": "Like playlist",
-            "songPlaylist": [
-              {
-                "name": "song1",
-                "artist": {
-                  "monthlyListeners": 0,
-                  "username": "sing",
-                  "password": "sing",
-                  "userType": "ARTIST"
-                },
-                "duration": "0:05"
-              }
-            ]
-          }
-        ],
-        "libraryName": "import library"
-      },
-      "username": "import",
-      "password": "import",
-      "userType": "CLIENT"
-    },
-    {
-      "library": {
-        "libraryPlaylists": [
-          {
-            "playlistName": "defaultPlaylist",
-            "songPlaylist": []
-          },
-          {
-            "playlistName": "p1",
-            "songPlaylist": []
-          },
-          {
-            "playlistName": "Like playlist",
-            "songPlaylist": [
-              {
-                "name": "song2",
-                "artist": {
-                  "monthlyListeners": 0,
-                  "username": "sing",
-                  "password": "sing",
-                  "userType": "ARTIST"
-                },
-                "duration": "0:05"
-              }
-            ]
           }
         ],
         "libraryName": "boj library"
       },
       "username": "boj",
-      "password": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
       "userType": "CLIENT"
     },
     {
-      "monthlyListeners": 0,
-      "username": "dasdad",
-      "password": "adfsaf",
+      "totalViews": 0,
+      "username": "singer4",
+      "password": "$2a$12$8bDogb112oYx/0CBnq63fO5EZ5R9ObUlS2zJCKVuUz0EltYBjhqC2",
       "userType": "ARTIST"
-    },
-    {
-      "monthlyListeners": 0,
-      "username": "sadfsd",
-      "password": "fsdfsdf",
-      "userType": "ARTIST"
-    },
-    {
-      "monthlyListeners": 0,
-      "username": "dsfdfsf",
-      "password": "1243214",
-      "userType": "ARTIST"
-    },
-    {
-      "library": {
-        "libraryPlaylists": [
-          {
-            "playlistName": "defaultPlaylist",
-            "songPlaylist": []
-          }
-        ],
-        "libraryName": "Test library"
-      },
-      "username": "Test",
-      "password": "12345",
-      "userType": "CLIENT"
     }
   ]
 }

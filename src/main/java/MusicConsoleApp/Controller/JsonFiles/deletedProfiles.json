@@ -5,36 +5,44 @@
         "libraryPlaylists": [
           {
             "playlistName": "defaultPlaylist",
-            "songPlaylist": []
-          },
-          {
-            "playlistName": "p1",
-            "songPlaylist": []
-          },
-          {
-            "playlistName": "Like playlist",
             "songPlaylist": [
               {
                 "name": "song1",
                 "artist": {
-                  "monthlyListeners": 0,
-                  "username": "sing",
-                  "password": "sing",
+                  "monthlyListeners": 1,
+                  "username": "Taylor",
+                  "password": "123",
                   "userType": "ARTIST"
                 },
                 "duration": "0:05",
-                "liked": true
+                "timesListened": 1
               },
               {
                 "name": "song2",
                 "artist": {
-                  "monthlyListeners": 0,
-                  "username": "sing",
-                  "password": "sing",
+                  "monthlyListeners": 1,
+                  "username": "Taylor",
+                  "password": "123",
                   "userType": "ARTIST"
                 },
                 "duration": "0:05",
-                "liked": true
+                "timesListened": 1
+              }
+            ]
+          },
+          {
+            "playlistName": "p1",
+            "songPlaylist": [
+              {
+                "name": "song1",
+                "artist": {
+                  "monthlyListeners": 2,
+                  "username": "Taylor",
+                  "password": "123",
+                  "userType": "ARTIST"
+                },
+                "duration": "0:05",
+                "timesListened": 2
               }
             ]
           }
@@ -42,7 +50,7 @@
         "libraryName": "boj library"
       },
       "username": "boj",
-      "password": "boj",
+      "password": "123",
       "userType": "CLIENT"
     }
   ]

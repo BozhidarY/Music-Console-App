@@ -65,7 +65,7 @@ public class UserDeserializer implements JsonDeserializer<Users> {
             JsonElement monthlyListenersElement = jsonObject.get("Listeners");
             if (monthlyListenersElement != null) {
                 long monthlyListeners = monthlyListenersElement.getAsLong();
-                artist.setMonthlyListeners(monthlyListeners);
+                artist.setTotalViews(monthlyListeners);
             }
 
 //            JsonArray songsArray = jsonObject.getAsJsonArray("songsList");

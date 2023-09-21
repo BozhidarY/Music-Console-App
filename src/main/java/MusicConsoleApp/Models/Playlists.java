@@ -8,7 +8,6 @@ public class Playlists {
     private String playlistName;
     private List<Songs> songPlaylist;
 
-
     public Playlists(String playlistName) {
         this.playlistName = playlistName;
         this.songPlaylist = new ArrayList<>();

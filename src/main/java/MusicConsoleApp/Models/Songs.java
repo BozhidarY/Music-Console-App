@@ -1,17 +1,18 @@
 package MusicConsoleApp.Models;
 
-import MusicConsoleApp.Models.Artist;
-
 public class Songs {
     private String name;
     private Artist artist;
+    private String artistName;
     private String duration;
+    private int timesListened;
 //    private boolean liked;
 
     public Songs(String name, Artist artist) {
         this.name = name;
-        this.artist = artist;
+        this.artistName = artist.getUsername();
         setDuration("0:05");
+        this.timesListened = 0;
 //        setLiked(false);
     }
 
@@ -39,7 +40,22 @@ public class Songs {
         this.duration = duration;
     }
 
-//    public boolean isLiked() {
+    public int getTimesListened() {
+        return timesListened;
+    }
+
+    public void setTimesListened(int timesListened) {
+        this.timesListened = timesListened;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+    //    public boolean isLiked() {
 //        return liked;
 //    }
 //

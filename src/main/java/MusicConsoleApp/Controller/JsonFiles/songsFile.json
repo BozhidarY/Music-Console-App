@@ -2,58 +2,63 @@
   "songs": [
     {
       "name": "song1",
-      "artist": {
-        "monthlyListeners": 0,
-        "username": "sing",
-        "password": "sing",
-        "userType": "ARTIST"
-      },
+      "artistName": "Taylor",
       "duration": "0:05",
-      "liked": false
+      "timesListened": 4
     },
     {
       "name": "song2",
-      "artist": {
-        "monthlyListeners": 0,
-        "username": "sing",
-        "password": "sing",
-        "userType": "ARTIST"
-      },
+      "artistName": "Taylor",
       "duration": "0:05",
-      "liked": false
+      "timesListened": 2
     },
     {
-      "name": "",
-      "artist": {
-        "monthlyListeners": 0,
-        "username": "dasdad",
-        "password": "adfsaf",
-        "userType": "ARTIST"
-      },
+      "name": "son3",
+      "artistName": "Taylor",
       "duration": "0:05",
-      "liked": false
+      "timesListened": 1
     },
     {
-      "name": "",
-      "artist": {
-        "monthlyListeners": 0,
-        "username": "sadfsd",
-        "password": "fsdfsdf",
-        "userType": "ARTIST"
-      },
+      "name": "song5",
+      "artistName": "Gaga",
       "duration": "0:05",
-      "liked": false
+      "timesListened": 1
     },
     {
-      "name": "",
-      "artist": {
-        "monthlyListeners": 0,
-        "username": "dsfdfsf",
-        "password": "1243214",
-        "userType": "ARTIST"
-      },
+      "name": "song6",
+      "artistName": "Taylor",
       "duration": "0:05",
-      "liked": false
+      "timesListened": 2
+    },
+    {
+      "name": "Exit",
+      "artistName": "Taylor",
+      "duration": "0:05",
+      "timesListened": 0
+    },
+    {
+      "name": "Exit",
+      "artistName": "Singer2",
+      "duration": "0:05",
+      "timesListened": 0
+    },
+    {
+      "name": "song10",
+      "artistName": "Taylor",
+      "duration": "0:05",
+      "timesListened": 6
+    },
+    {
+      "name": "asd",
+      "artistName": "Taylor",
+      "duration": "0:05",
+      "timesListened": 0
+    },
+    {
+      "name": "Exit",
+      "artistName": "singer4",
+      "duration": "0:05",
+      "timesListened": 0
     }
   ]
 }

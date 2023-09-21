@@ -1,25 +1,22 @@
 package MusicConsoleApp.Controller.ServiceMethods;
 
+import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserDB;
-import MusicConsoleApp.Models.Playlists;
-import MusicConsoleApp.Models.Songs;
-import MusicConsoleApp.Models.Client;
+import MusicConsoleApp.Models.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientServiceMethods {
     Scanner scanner = new Scanner(System.in);
     SongRemainingTime songRemainingTime = new SongRemainingTime();
+    LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
 
     public void openMessage(Client client) {
         System.out.println("Welcome " + client.getUsername() + ". There re 3 modes to operate in this app.\nThe first mode is that" +
                 " you can listen to music. \nSecond one - change and add playlists to your library and \nthe third" +
-                " one - you can import a library from another account to yours.");
+                " one - you can import a library from another account to yours. Inbox - check your favourite artists.");
         System.out.println("List of commands: Listen/Edit/Import/Exit");
     }
 
@@ -28,28 +25,6 @@ public class ClientServiceMethods {
                 .filter(songs -> songs.getName().contains(substring))
                 .collect(Collectors.toList());
     }
-
-    public void searchBar(Client client, SongData songData) {
-        List<Songs> filteredSongs = new ArrayList<>();
-        System.out.print("Search bar: ");
-        String search = scanner.nextLine();
-        filteredSongs = searchMenu(songData, search);
-        if (filteredSongs.isEmpty()) {
-            System.out.println("No songs with this name. Try again");
-            searchBar(client, songData);
-        }
-        filteredSongs.forEach(songs -> System.out.println(songs));
-        System.out.println("Choose a song name to play");
-        String choiceSong = scanner.nextLine();
-        for (Songs song : filteredSongs) {
-            if (song.getName().equals(choiceSong)) {
-                System.out.println("You re listening");
-                songRemainingTime.stopwatch(song, scanner);
-                likeSong(client, song);
-            }
-        }
-    }
-
     public void likeSong(Client client, Songs song) {
         boolean result = false;
         System.out.println("Did you like the song? (Y/N)");
@@ -79,16 +54,75 @@ public class ClientServiceMethods {
         }
     }
 
+//    public void listenSong(Client client, List<Songs> songsToListen){
+//
+//    }
+
+    public void searchBar(SongData songData, Client client, UserDB userDB) {
+        List<Songs> filteredSongs;
+        System.out.print("Search bar: ");
+        String search = scanner.nextLine();
+        filteredSongs = searchMenu(songData, search);
+        if (filteredSongs.isEmpty()) {
+            System.out.println("No songs with this name. Try again");
+            searchBar(songData, client, userDB);
+        }
+        else{
+            filteredSongs.forEach(songs -> System.out.println(songs));
+            System.out.println("Choose a song name to play");
+            String choiceSong = scanner.nextLine();
+            for (Songs song : filteredSongs) {
+                if (song.getName().equals(choiceSong)) {
+                    int count = song.getTimesListened();
+                    System.out.println("You re listening");
+                    songRemainingTime.stopwatch(song, scanner);
+                    song.setTimesListened(song.getTimesListened() + 1);
+                }
+            }
+        }
+    }
+//    public void setDefaultPlaylist(Client client) {
+//        client.getLibrary().getLibraryList().forEach(playlists -> {
+//            if (playlists.getPlaylistName().equals("defaultPlaylist")) {
+//                playlists.getSongPlaylist().forEach(songs -> {
+//                    songs.setTimesListened(1);
+//                });
+//            }
+//        });
+//    }
+
     public void randomSong(Client client, SongData songData) {
         Random random = new Random();
         int randomIndex = random.nextInt(songData.getSongsList().size());
         Songs currentSong = songData.getSongsList().get(randomIndex);
         System.out.println("Now listening to " + currentSong.getName());
         songRemainingTime.stopwatch(currentSong, scanner);
-        likeSong(client, currentSong);
+        currentSong.setTimesListened(currentSong.getTimesListened() + 1);
+//        likeSong(client, currentSong);
     }
 
-    public void playlistListen(Client client) {
+    public void songDataChange(Songs song, SongData songData){
+        for(Songs songFromData: songData.getSongsList()){
+            if(song.getName().equals(songFromData.getName())){
+                songFromData.setTimesListened(songFromData.getTimesListened() + 1);
+            }
+        }
+    }
+    public void artistDataChange(SongData songData, UserDB userDB){
+        for(Users user: userDB.getUsersList()){
+            if(user instanceof Artist artist){
+                long counter = 0;
+                for(Songs song: songData.getSongsList()){
+                    if(artist.getUsername().equals(song.getArtistName())){
+                        counter += song.getTimesListened();
+                        artist.setTotalViews(counter);
+                    }
+                }
+            }
+        }
+    }
+
+    public void playlistListen(Client client, SongData songData) {
         System.out.println("From what playlist do you want to play a song");
         String playlistChoice = scanner.nextLine();
         client.getLibrary().getLibraryList().forEach(playlists -> {
@@ -103,7 +137,9 @@ public class ClientServiceMethods {
                     if (songs.getName().equals(choiceSong2)) {
                         System.out.println("You re listening");
                         songRemainingTime.stopwatch(songs, scanner);
-                        likeSong(client, songs);
+                        songs.setTimesListened(songs.getTimesListened() + 1);
+                        songDataChange(songs, songData);
+//                        likeSong(client, songs);
                     }
                 });
             }
@@ -177,6 +213,25 @@ public class ClientServiceMethods {
                 System.out.println("Changes made");
             }
         });
+    }
+
+    public void favouriteArtist(UserDB userDB){
+        HashMap<String,Integer> favouriteArtist = new HashMap<>();
+        for(Users user:userDB.getUsersList()){
+            if(user instanceof Client client){
+                for(Playlists playlist:client.getLibrary().getLibraryList()){
+                    for(Songs song: playlist.getSongPlaylist()){
+                        favouriteArtist.put(song.getArtistName(), favouriteArtist.getOrDefault(song.getArtistName(), 0) + song.getTimesListened());
+                    }
+                }
+            }
+        }
+        System.out.println("HashMap Contents:");
+        for (Map.Entry<String, Integer> entry : favouriteArtist.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.println("Artist Name: " + key + ", Total listens: " + value);
+        }
     }
 }
 
