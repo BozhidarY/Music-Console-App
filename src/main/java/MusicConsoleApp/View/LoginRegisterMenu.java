@@ -60,14 +60,12 @@ public class LoginRegisterMenu {
     }
 
     public void register(UserDB userDB) {
-        try{
             System.out.println("Register Form: ");
             System.out.println("Enter username");
             String username = scanner.nextLine();
             System.out.println("Enter password");
             String password = scanner.nextLine();
             String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
             boolean dublicationCheck = false;
 
             for (Users user : userDB.getUsersList()) {
@@ -106,10 +104,5 @@ public class LoginRegisterMenu {
                     login(userDB);
                 }
             }
-        } catch (WrongCredentialsException e) {
-            System.out.println(e.getMessage() + ". Try again");
-            register(userDB);
-        }
-
     }
 }

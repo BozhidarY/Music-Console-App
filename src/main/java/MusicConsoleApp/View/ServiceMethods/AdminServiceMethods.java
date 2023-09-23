@@ -1,4 +1,4 @@
-package MusicConsoleApp.Controller.ServiceMethods;
+package MusicConsoleApp.View.ServiceMethods;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.UserDB;

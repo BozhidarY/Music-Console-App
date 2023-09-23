@@ -1,4 +1,4 @@
-package MusicConsoleApp.Controller.ServiceMethods;
+package MusicConsoleApp.View.ServiceMethods;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Controller.SongData;

@@ -8,23 +8,13 @@ public class Validators {
     public static final Pattern passwordPattern = Pattern.compile("[0-9]{3,10}$");
 
 
-    public boolean validateUsername(String username) throws WrongCredentialsException{
-            Matcher matcher = usernamePattern.matcher(username);
-            if(matcher.matches()){
-                return true;
-            }
-            else {
-                throw new WrongCredentialsException();
-            }
+    public boolean validateUsername(String username) {
+        Matcher matcher = usernamePattern.matcher(username);
+        return matcher.matches();
     }
 
-    public boolean validatePassword(String password) throws WrongCredentialsException{
+    public boolean validatePassword(String password) {
         Matcher matcher = passwordPattern.matcher(password);
-        if(matcher.matches()){
-            return true;
-        }
-        else {
-            throw new WrongCredentialsException();
-        }
+        return matcher.matches();
     }
 }

@@ -1,9 +1,8 @@
 package MusicConsoleApp.View;
 
-import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
-import MusicConsoleApp.Controller.ServiceMethods.AdminServiceMethods;
-import MusicConsoleApp.Controller.ServiceMethods.ArtistServiceMethods;
-import MusicConsoleApp.Controller.ServiceMethods.ClientServiceMethods;
+import MusicConsoleApp.View.ServiceMethods.AdminServiceMethods;
+import MusicConsoleApp.View.ServiceMethods.ArtistServiceMethods;
+import MusicConsoleApp.View.ServiceMethods.ClientServiceMethods;
 import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Models.*;
