@@ -2,12 +2,11 @@ package MusicConsoleApp.Models;
 
 public class Artist extends Users {
 
-    private long totalViews = 0;
+    private long totalViews;
 
-    //    private List<Songs> songsList;
     public Artist(String username, String password) {
         super(username, password);
-//        this.songsList = new ArrayList<>();
+        this.totalViews = 0;
         setUserType(UserType.ARTIST);
     }
 

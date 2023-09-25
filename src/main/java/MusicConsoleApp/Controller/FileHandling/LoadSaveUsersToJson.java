@@ -48,5 +48,4 @@ public class LoadSaveUsersToJson {
             return newUserDB;
         }
     }
-
 }

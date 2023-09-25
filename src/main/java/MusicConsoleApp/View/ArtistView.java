@@ -1,17 +1,12 @@
 package MusicConsoleApp.View;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSongs;
-import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserControllers.ArtistController;
 import MusicConsoleApp.Controller.UserDB;
-import MusicConsoleApp.Models.Constants;
-import MusicConsoleApp.Models.Songs;
 import MusicConsoleApp.Models.Artist;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class ArtistView {
     Scanner scanner = new Scanner(System.in);
@@ -34,7 +29,13 @@ public class ArtistView {
 
         System.out.println("Type the name of the song you want to add");
         String songName = scanner.nextLine();
-        artistController.addSongToJson(songName);
+        if(!artistController.checkIfSongExists(songName)){
+            artistController.addSongToJson(songName);
+        }
+        else {
+            System.out.println("Song already exists.");
+        }
+
     }
 
 

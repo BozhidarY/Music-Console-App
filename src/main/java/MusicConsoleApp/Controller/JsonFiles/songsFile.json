@@ -28,13 +28,13 @@
       "name": "song6",
       "artistName": "Taylor",
       "duration": "0:05",
-      "timesListened": 2
+      "timesListened": 3
     },
     {
       "name": "Exit",
       "artistName": "Taylor",
       "duration": "0:05",
-      "timesListened": 0
+      "timesListened": 2
     },
     {
       "name": "Exit",
@@ -52,11 +52,17 @@
       "name": "asd",
       "artistName": "Taylor",
       "duration": "0:05",
-      "timesListened": 0
+      "timesListened": 4
     },
     {
       "name": "Exit",
       "artistName": "singer4",
+      "duration": "0:05",
+      "timesListened": 0
+    },
+    {
+      "name": "",
+      "artistName": "singer",
       "duration": "0:05",
       "timesListened": 0
     }

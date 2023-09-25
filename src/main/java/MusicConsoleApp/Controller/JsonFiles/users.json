@@ -1,7 +1,7 @@
 {
   "usersList": [
     {
-      "totalViews": 0,
+      "totalViews": 23,
       "username": "Taylor",
       "password": "$2a$12$9t.4Q0M89WvboCf6Mqx1feDvRo8msdeYdaSIST/QD5mU4HqOr3hBO",
       "userType": "ARTIST"
@@ -17,7 +17,14 @@
         "libraryPlaylists": [
           {
             "playlistName": "defaultPlaylist",
-            "songPlaylist": []
+            "songPlaylist": [
+              {
+                "name": "asd",
+                "artistName": "Taylor",
+                "duration": "0:05",
+                "timesListened": 4
+              }
+            ]
           }
         ],
         "libraryName": "boj library"
@@ -30,6 +37,60 @@
       "totalViews": 0,
       "username": "singer4",
       "password": "$2a$12$8bDogb112oYx/0CBnq63fO5EZ5R9ObUlS2zJCKVuUz0EltYBjhqC2",
+      "userType": "ARTIST"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "test library"
+      },
+      "username": "test",
+      "password": "$2a$12$VgWN6yWkX8gFpe9oUgyE/uQyuo6.QOmjoC93.22advoVhiGn.Ah7m",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "test2 library"
+      },
+      "username": "test2",
+      "password": "$2a$12$4.Se7QYeRDeHDP3TrxcuMupqlnsJZEBFDw/kd9YFT49Vp2mqFEG1u",
+      "userType": "CLIENT"
+    },
+    {
+      "totalViews": 0,
+      "username": "singer10",
+      "password": "$2a$12$mlk./MhtXGInBvR6BphP1Obwdsyg2kI74x75ZTz.RpMnib97aH8ZS",
+      "userType": "ARTIST"
+    },
+    {
+      "totalViews": 0,
+      "username": "singer11",
+      "password": "$2a$12$dRjIdXHd0U5f7z2.V3Fdqe2rzEwXyaEvdEKDKbExy5Ogk5taQe0PO",
+      "userType": "ARTIST"
+    },
+    {
+      "totalViews": 0,
+      "username": "singer",
+      "password": "$2a$12$UoqKa5igYuWnWf8GuIVRgeONjQM6clFqdlruyuRzj9CkdxDdG/vva",
       "userType": "ARTIST"
     }
   ]

@@ -1,20 +1,25 @@
 package MusicConsoleApp.Controller.UserControllers;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
+import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserDB;
 import MusicConsoleApp.Models.*;
 import MusicConsoleApp.Controller.SongRemainingTime;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientController {
     Scanner scanner = new Scanner(System.in);
     SongRemainingTime songRemainingTime = new SongRemainingTime();
-    LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
+    LoadSongs loadSongs = new LoadSongs();
 
     private Client client;
+    private UserDB userDB;
+    private SongData songData;
+
     public ClientController(Client client){
         this.client = client;
     }
@@ -27,7 +32,6 @@ public class ClientController {
 
 
     public Songs SongByChoice(List<Songs> filteredSongs, String songChoice) {
-        filteredSongs.forEach(songs -> System.out.println(songs));
         for (Songs song : filteredSongs) {
             if (song.getName().equals(songChoice)) {
                 return song;
@@ -37,7 +41,6 @@ public class ClientController {
     }
 
     public void visualizeSongRemainingTime(Songs song){
-        System.out.println("You re listening");
         songRemainingTime.stopwatch(song, scanner);
         song.setTimesListened(song.getTimesListened() + 1);
     }
@@ -81,18 +84,17 @@ public class ClientController {
     }
 
     public Songs searchSongInPlaylist(Playlists playlists, String choiceSong){
-        for(Songs song: playlists.getSongPlaylist()){
-            if(song.getName().equals(choiceSong)){
-                return song;
+            for(Songs song: playlists.getSongPlaylist()){
+                if(song.getName().equals(choiceSong)){
+                    return song;
+                }
             }
-
-        }
         return null;
     }
 
     public void addPlaylist(String playlistName) {
-        Playlists playlists = new Playlists(playlistName);
-        client.getLibrary().getLibraryList().add(playlists);
+        Playlists playlist = new Playlists(playlistName);
+        client.getLibrary().getLibraryList().add(playlist);
     }
 
     public void deletePlaylist(String playlistName) {
@@ -125,15 +127,15 @@ public class ClientController {
         playlist.getSongPlaylist().removeAll(deletedSongs);
     }
 
-    public void importLibrary(UserDB userDB, String username, String password) {
-        userDB.getUsersList().forEach(client1 -> {
-            if (client1.getUsername().equals(username) && client1.getPassword().equals(password) && client1 instanceof Client client2) {
-                client.setLibrary(client2.getLibrary());
+    public void importLibrary(UserDB userDB, String username) {
+        for(Users user: userDB.getUsersList()){
+            if(user instanceof Client importClient && user.getUsername().equals(username)){
+                client.setLibrary(importClient.getLibrary());
             }
-        });
+        }
     }
 
-    public void favouriteArtist(UserDB userDB){
+    public HashMap<String, Integer> favouriteArtist(UserDB userDB){
         HashMap<String,Integer> favouriteArtist = new HashMap<>();
         for(Users user:userDB.getUsersList()){
             if(user instanceof Client client){
@@ -144,12 +146,8 @@ public class ClientController {
                 }
             }
         }
-        System.out.println("HashMap Contents:");
-        for (Map.Entry<String, Integer> entry : favouriteArtist.entrySet()) {
-            String key = entry.getKey();
-            Integer value = entry.getValue();
-            System.out.println("Artist Name: " + key + ", Total listens: " + value);
-        }
+        return favouriteArtist;
+
     }
 
     public Client getClient() {

@@ -9,7 +9,9 @@ import MusicConsoleApp.Models.Constants;
 import MusicConsoleApp.Models.Playlists;
 import MusicConsoleApp.Models.Songs;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ClientView {
@@ -42,6 +44,9 @@ public class ClientView {
                             System.out.print("Search Bar: ");
                             String searchWord = scanner.nextLine();
                             List<Songs> filteredSongs = clientController.searchMenu(songData, searchWord);
+                            for(Songs song: filteredSongs){
+                                System.out.println(song);
+                            }
                             if (filteredSongs.isEmpty()) {
                                 System.out.println("No songs with this name. Try again");
                             }
@@ -54,6 +59,7 @@ public class ClientView {
                         }
                         case "RANDOM" -> {
                             Songs song = clientController.randomSong(songData);
+                            System.out.println("Now playing: " + song);
                             clientController.visualizeSongRemainingTime(song);
                         }
                         case "PLAYLIST" -> {
@@ -62,8 +68,13 @@ public class ClientView {
                             Playlists choosenPlaylist = clientController.searchPlaylist(playlistChoice);
                             System.out.println("Which song do you want to play?");
                             String songChoice = scanner.nextLine();
-                            Songs song = clientController.searchSongInPlaylist(choosenPlaylist, songChoice);
-                            clientController.visualizeSongRemainingTime(song);
+                            try{
+                                Songs song = clientController.searchSongInPlaylist(choosenPlaylist, songChoice);
+                                clientController.visualizeSongRemainingTime(song);
+                            }catch (NullPointerException e){
+                                System.out.println("No songs in this playlist");
+                            }
+
                         }
                         default -> {
                             System.out.println("Invalid Input");
@@ -90,7 +101,7 @@ public class ClientView {
                             System.out.println("Choose in which playlist to add a song");
                             String playlistName = scanner.nextLine();
                             Playlists choosenPlaylist = clientController.searchPlaylist(playlistName);
-                            System.out.println("Which song to delete");
+                            System.out.println("Which song to add");
                             String songChoice = scanner.nextLine();
                             clientController.addSong(choosenPlaylist,songChoice, songData);
                         }
@@ -113,14 +124,20 @@ public class ClientView {
                             "Note: You can have only one library, so if you want to import, your current library will be overwritten");
                     System.out.println("Enter username and password");
                     String username = scanner.nextLine();
-                    String password = scanner.nextLine();
-                    clientController.importLibrary(userDB, username, password);
+//                    String password = scanner.nextLine();
+                    clientController.importLibrary(userDB, username);
                 }
                 default -> {
                     System.out.println("Invalid Input");
                 }
                 case "INBOX" -> {
-                    clientController.favouriteArtist(userDB);
+                    HashMap<String, Integer> favouriteArtist = clientController.favouriteArtist(userDB);
+                    System.out.println("HashMap Contents:");
+                    for (Map.Entry<String, Integer> entry : favouriteArtist.entrySet()) {
+                        String key = entry.getKey();
+                        Integer value = entry.getValue();
+                        System.out.println("Artist Name: " + key + ", Total listens: " + value);
+                    }
                 }
             }
 

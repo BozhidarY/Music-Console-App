@@ -6,25 +6,31 @@ import MusicConsoleApp.Controller.UserDB;
 import MusicConsoleApp.Models.Artist;
 import MusicConsoleApp.Models.Constants;
 import MusicConsoleApp.Models.Songs;
-import MusicConsoleApp.View.ArtistView;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ArtistController {
     private Artist artist;
     LoadSongs loadSongs = new LoadSongs();
-    Scanner scanner = new Scanner(System.in);
-
 
     public ArtistController(Artist artist){
         this.artist = artist;
     }
 
+    SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
+
+    public boolean checkIfSongExists(String songName){
+        for(Songs song: songData.getSongsList()){
+            if(song.getName().equals(songName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addSongToJson(String songName) {
-        SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
         Songs newSong = new Songs(songName, artist);
         songData.getSongsList().add(newSong);
         loadSongs.saveSongs(Constants.SONG_JSON_PATH, songData);

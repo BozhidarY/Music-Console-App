@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class AdminController {
     private Admin admin;
     LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
-    Scanner scanner = new Scanner(System.in);
 
     public AdminController(Admin admin){
         this.admin = admin;
