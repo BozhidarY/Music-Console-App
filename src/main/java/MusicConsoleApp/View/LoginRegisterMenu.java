@@ -2,6 +2,9 @@ package MusicConsoleApp.View;
 
 
 
+import MusicConsoleApp.Controller.UserControllers.AdminController;
+import MusicConsoleApp.Controller.UserControllers.ArtistController;
+import MusicConsoleApp.Controller.UserControllers.ClientController;
 import MusicConsoleApp.Controller.UserDB;
 import MusicConsoleApp.Exceptions.Validators;
 import MusicConsoleApp.Models.Admin;
@@ -18,12 +21,11 @@ import java.util.Scanner;
 
 public class LoginRegisterMenu {
     Scanner scanner = new Scanner(System.in);
-    UserService userService = new UserService();
     Validators validators = new Validators();
 
     private final Logger logger = (Logger) LogManager.getLogger(LoginRegisterMenu.class);
 
-    public Users login(UserDB userDB) {
+    public void login(UserDB userDB) {
         boolean hasLoginOccured = false;
 
         System.out.println("Login Form: ");
@@ -39,11 +41,15 @@ public class LoginRegisterMenu {
                     if (user instanceof Artist artist) {
                         hasLoginOccured = true;
                         logger.info("User has loggined: username={}", username);
-                        return artist;
+                        ArtistController artistController = new ArtistController(artist);
+                        ArtistView artistView = new ArtistView(artistController);
+                        artistView.openArtistCommunication(userDB);
                     } else if (user instanceof Client client) {
                         hasLoginOccured = true;
                         logger.info("User has loggined: username={}", username);
-                        return client;
+                        ClientController clientController = new ClientController(client);
+                        ClientView clientView = new ClientView(clientController);
+                        clientView.openClientCommunication(userDB);
                     }
                 }
             }
@@ -51,16 +57,17 @@ public class LoginRegisterMenu {
         if (username.equals(Admin.getAdmin().getUsername()) && password.equals(Admin.getAdmin().getPassword())) {
             hasLoginOccured = true;
             logger.info("The admin has been loggined: username={}", username);
-            return Admin.getAdmin();
+            AdminController adminController = new AdminController(Admin.getAdmin());
+            AdminView adminView = new AdminView(adminController);
+            adminView.openAdminCommunication(userDB);
         }
         if (!hasLoginOccured) {
             System.out.println("No such credentials. You need to register");
             register(userDB);
         }
-        return null;
     }
 
-    public Users register(UserDB userDB) {
+    public void register(UserDB userDB) {
         System.out.println("Register Form: ");
         System.out.println("Enter username");
         String username = scanner.nextLine();
@@ -84,14 +91,18 @@ public class LoginRegisterMenu {
                     userDB.getUsersList().add(artist);
                     System.out.println("You have registered successfully");
                     logger.info("User registered successfully: username={} as {}", username, artist.getUserType() );
-                    return artist;
+                    ArtistController artistController = new ArtistController(artist);
+                    ArtistView artistView = new ArtistView(artistController);
+                    artistView.openArtistCommunication(userDB);
                 }
                 case "Client" -> {
                     Client client = new Client(username, hashedPassword);
                     userDB.getUsersList().add(client);
                     System.out.println("You have registered successfully");
                     logger.info("User registered successfully: username={} as {}", username, client.getUserType() );
-                    return client;
+                    ClientController clientController = new ClientController(client);
+                    ClientView clientView = new ClientView(clientController);
+                    clientView.openClientCommunication(userDB);
                 }
             }
         } else {
@@ -104,6 +115,5 @@ public class LoginRegisterMenu {
                 login(userDB);
             }
         }
-        return null;
     }
 }

@@ -1,4 +1,4 @@
-package MusicConsoleApp.View;
+package MusicConsoleApp.Controller;
 
 import MusicConsoleApp.Models.Songs;
 
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class SongRemainingTime {
 
-    public int converSongDuration(Songs songs) {
+    public int convertSongDuration(Songs songs) {
         String[] parts = songs.getDuration().split(":");
         int duration = Integer.parseInt(parts[0]) * 60 + Integer.parseInt(parts[1]);
         return duration;
@@ -14,8 +14,7 @@ public class SongRemainingTime {
 
     public void stopwatch(Songs songs, Scanner scanner) {
 
-        System.out.print("Enter the duration in seconds: ");
-        int durationInSeconds = converSongDuration(songs);
+        int durationInSeconds = convertSongDuration(songs);
 
         long startTime = System.currentTimeMillis();
         long endTime = startTime + (durationInSeconds * 1000L);

@@ -1,76 +1,193 @@
 package MusicConsoleApp.Controller.UserControllers;
 
-import MusicConsoleApp.Controller.FileHandling.LoadSongs;
+import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserDB;
-import MusicConsoleApp.Models.Client;
-import MusicConsoleApp.Models.Constants;
-import MusicConsoleApp.View.ClientView;
+import MusicConsoleApp.Models.*;
+import MusicConsoleApp.Controller.SongRemainingTime;
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClientController {
-    private Client client;
-    private ClientView clientView;
     Scanner scanner = new Scanner(System.in);
-    LoadSongs loadSongs = new LoadSongs();
-    SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
+    SongRemainingTime songRemainingTime = new SongRemainingTime();
+    LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
 
-    public ClientController(Client client, ClientView clientView){
+    private Client client;
+    public ClientController(Client client){
         this.client = client;
-        this.clientView = clientView;
     }
 
-    public void openClientCommunication(UserDB userDB) {
+    public List<Songs> searchMenu(SongData songData, String substring) {
+        return songData.getSongsList().stream()
+                .filter(songs -> songs.getName().contains(substring))
+                .collect(Collectors.toList());
+    }
 
-        clientView.openMessage(client);
 
-        String choice = scanner.nextLine();
-        while (!choice.equals("Exit")) {
-            switch (choice.toUpperCase()) {
-                case "LISTEN" -> {
-                    System.out.println("Search for a song/ Listen to a random one/Listen to a song from a playlist of yours");
-                    System.out.println("List of commands: Search/Random/Playlist");
-                    String listenChoice = scanner.nextLine();
-                    switch (listenChoice.toUpperCase()) {
-                        case "SEARCH" -> {
-                            clientView.searchBar(songData, client, userDB);
-                        }
-                        case "RANDOM" -> clientView.randomSong(client, songData);
-                        case "PLAYLIST" -> clientView.playlistListen(client, songData);
-                        default -> {
-                            System.out.println("Invalid Input");
-                        }
-                    }
-                }
-                case "EDIT" -> {
-                    System.out.println("In case 'Edit' you can do 4 things. Add/Delete a playlist to/from your library or " +
-                            "Add/Delete a song to/from a playlist");
-                    System.out.println("List of commands: AddPlaylist/DeletePlaylist/AddSong/DeleteSong");
-                    String choiceEdit = scanner.nextLine();
-                    switch (choiceEdit.toUpperCase()) {
-                        case "ADDPLAYLIST" -> clientView.addPlaylist(client);
-                        case "DELETEPLAYLIST" -> clientView.deletePlaylist(client);
-                        case "ADDSONG" -> clientView.addSong(client, songData);
-                        case "DELETESONG" -> clientView.deleteSong(client);
-                        default -> {
-                            System.out.println("Invalid Input");
-                        }
-                    }
-                }
-                case "IMPORT" -> clientView.importLibrary(client, userDB);
-                default -> {
-                    System.out.println("Invalid Input");
-                }
-                case "INBOX" -> {
-                    clientView.favouriteArtist(userDB);
-                }
+    public Songs SongByChoice(List<Songs> filteredSongs, String songChoice) {
+        filteredSongs.forEach(songs -> System.out.println(songs));
+        for (Songs song : filteredSongs) {
+            if (song.getName().equals(songChoice)) {
+                return song;
             }
+        }
+        return null;
+    }
 
-            clientView.artistDataChange(songData, userDB);
-            loadSongs.saveSongs(Constants.SONG_JSON_PATH, songData);
-            System.out.println("Choose a new mode or exit the programm(Listen, Edit, Import, Exit)");
-            choice = scanner.nextLine();
+    public void visualizeSongRemainingTime(Songs song){
+        System.out.println("You re listening");
+        songRemainingTime.stopwatch(song, scanner);
+        song.setTimesListened(song.getTimesListened() + 1);
+    }
+
+
+    public Songs randomSong(SongData songData) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(songData.getSongsList().size());
+        Songs currentSong = songData.getSongsList().get(randomIndex);
+        return currentSong;
+    }
+
+    public void songDataChange(Songs song, SongData songData){
+        for(Songs songFromData: songData.getSongsList()){
+            if(song.getName().equals(songFromData.getName())){
+                songFromData.setTimesListened(songFromData.getTimesListened() + 1);
+            }
         }
     }
+    public void artistDataChange(SongData songData, UserDB userDB){
+        for(Users user: userDB.getUsersList()){
+            if(user instanceof Artist artist){
+                long counter = 0;
+                for(Songs song: songData.getSongsList()){
+                    if(artist.getUsername().equals(song.getArtistName())){
+                        counter += song.getTimesListened();
+                        artist.setTotalViews(counter);
+                    }
+                }
+            }
+        }
+    }
+
+    public Playlists searchPlaylist(String playlistChoice) {
+        for(Playlists playlist: client.getLibrary().getLibraryList()){
+            if(playlistChoice.equals(playlist.getPlaylistName())){
+                return playlist;
+            }
+        }
+        return null;
+    }
+
+    public Songs searchSongInPlaylist(Playlists playlists, String choiceSong){
+        for(Songs song: playlists.getSongPlaylist()){
+            if(song.getName().equals(choiceSong)){
+                return song;
+            }
+
+        }
+        return null;
+    }
+
+    public void addPlaylist(String playlistName) {
+        Playlists playlists = new Playlists(playlistName);
+        client.getLibrary().getLibraryList().add(playlists);
+    }
+
+    public void deletePlaylist(String playlistName) {
+        List<Playlists> removedPlaylists = new ArrayList<>();
+        for (Playlists playlists : client.getLibrary().getLibraryList()) {
+            if (playlistName.equals(playlists.getPlaylistName())) {
+                removedPlaylists.add(playlists);
+            }
+        }
+        client.getLibrary().getLibraryList().removeAll(removedPlaylists);
+    }
+
+//    public void choosePlaylis
+
+    public void addSong(Playlists playlist, String songName, SongData songData) {
+        for(Songs song: songData.getSongsList()){
+            if (song.getName().equals(songName)) {
+                playlist.getSongPlaylist().add(song);
+            }
+        }
+    }
+
+    public void deleteSong(Playlists playlist, String songName) {
+        List<Songs> deletedSongs = new ArrayList<>();
+        for (Songs song : playlist.getSongPlaylist()) {
+            if (song.getName().equals(songName)) {
+                deletedSongs.add(song);
+            }
+        }
+        playlist.getSongPlaylist().removeAll(deletedSongs);
+    }
+
+    public void importLibrary(UserDB userDB, String username, String password) {
+        userDB.getUsersList().forEach(client1 -> {
+            if (client1.getUsername().equals(username) && client1.getPassword().equals(password) && client1 instanceof Client client2) {
+                client.setLibrary(client2.getLibrary());
+            }
+        });
+    }
+
+    public void favouriteArtist(UserDB userDB){
+        HashMap<String,Integer> favouriteArtist = new HashMap<>();
+        for(Users user:userDB.getUsersList()){
+            if(user instanceof Client client){
+                for(Playlists playlist:client.getLibrary().getLibraryList()){
+                    for(Songs song: playlist.getSongPlaylist()){
+                        favouriteArtist.put(song.getArtistName(), favouriteArtist.getOrDefault(song.getArtistName(), 0) + song.getTimesListened());
+                    }
+                }
+            }
+        }
+        System.out.println("HashMap Contents:");
+        for (Map.Entry<String, Integer> entry : favouriteArtist.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.println("Artist Name: " + key + ", Total listens: " + value);
+        }
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    //    public void likeSong(Client client, Songs song) {
+//        boolean result = false;
+//        System.out.println("Did you like the song? (Y/N)");
+//        String likeChoice = scanner.nextLine();
+//        if (likeChoice.equals("Y")) {
+//            for (Playlists playlists : client.getLibrary().getLibraryList()) {
+//                if (playlists.getPlaylistName().equals("Like playlist")) {
+////                    song.setLiked(true);
+//                    playlists.getSongPlaylist().add(song);
+//                    result = true;
+//                }
+//            }
+//            if (!result) {
+//                Playlists playlists = new Playlists("Like playlist");
+//                client.getLibrary().getLibraryList().add(playlists);
+////                song.setLiked(true);
+//                playlists.getSongPlaylist().add(song);
+//            }
+//        } else if (likeChoice.equals("N")) {
+////            song.setLiked(false);
+//            for (Playlists playlists : client.getLibrary().getLibraryList()) {
+//                if (playlists.getPlaylistName().equals("Like playlist")) {
+//                    playlists.getSongPlaylist().remove(song);
+//                    System.out.println("Success");
+//                }
+//            }
+//        }
+//    }
 }
+
+
