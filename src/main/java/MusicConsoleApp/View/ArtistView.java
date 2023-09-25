@@ -1,4 +1,4 @@
-package MusicConsoleApp.View.ServiceMethods;
+package MusicConsoleApp.View;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Controller.SongData;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ArtistServiceMethods {
+public class ArtistView {
     Scanner scanner = new Scanner(System.in);
     LoadSongs loadSongs = new LoadSongs();
 

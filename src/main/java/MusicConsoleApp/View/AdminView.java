@@ -1,4 +1,4 @@
-package MusicConsoleApp.View.ServiceMethods;
+package MusicConsoleApp.View;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.UserDB;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AdminServiceMethods {
+public class AdminView {
     Scanner scanner = new Scanner(System.in);
     LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
 

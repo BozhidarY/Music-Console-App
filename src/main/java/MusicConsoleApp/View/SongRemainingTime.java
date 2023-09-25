@@ -1,4 +1,4 @@
-package MusicConsoleApp.View.ServiceMethods;
+package MusicConsoleApp.View;
 
 import MusicConsoleApp.Models.Songs;
 

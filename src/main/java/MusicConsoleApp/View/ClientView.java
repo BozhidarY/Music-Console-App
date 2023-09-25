@@ -1,4 +1,4 @@
-package MusicConsoleApp.View.ServiceMethods;
+package MusicConsoleApp.View;
 
 import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.SongData;
@@ -8,7 +8,7 @@ import MusicConsoleApp.Models.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ClientServiceMethods {
+public class ClientView {
     Scanner scanner = new Scanner(System.in);
     SongRemainingTime songRemainingTime = new SongRemainingTime();
     LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
