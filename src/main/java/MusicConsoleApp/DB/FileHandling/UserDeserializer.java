@@ -1,12 +1,6 @@
-package MusicConsoleApp.Controller.FileHandling;
+package MusicConsoleApp.DB.FileHandling;
 
-import MusicConsoleApp.Models.Library;
-import MusicConsoleApp.Models.Playlist;
-import MusicConsoleApp.Models.Songs;
-import MusicConsoleApp.Models.Artist;
-import MusicConsoleApp.Models.Client;
-import MusicConsoleApp.Models.UserType;
-import MusicConsoleApp.Models.Users;
+import MusicConsoleApp.Models.*;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;

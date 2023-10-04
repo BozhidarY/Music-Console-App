@@ -17,7 +17,7 @@ public abstract class Users {
         return username;
     }
 
-    public void setUsername(String username) throws WrongCredentialsException {
+    public void setUsername(String username) {
         this.username = username;
     }
 

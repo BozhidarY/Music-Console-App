@@ -1,11 +1,9 @@
-package MusicConsoleApp.Controller.UserControllers;
+package MusicConsoleApp.Controller;
 
-import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
-import MusicConsoleApp.Controller.FileHandling.LoadSongs;
-import MusicConsoleApp.Controller.SongData;
-import MusicConsoleApp.Controller.UserDB;
+
+import MusicConsoleApp.DB.SongData;
+import MusicConsoleApp.DB.UserDB;
 import MusicConsoleApp.Models.Artist;
-import MusicConsoleApp.Models.Constants;
 import MusicConsoleApp.Models.Songs;
 
 import java.util.Comparator;
@@ -14,20 +12,18 @@ import java.util.stream.Collectors;
 
 public class ArtistController {
     private Artist artist;
-    LoadSongs loadSongs = new LoadSongs();
-    LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
+    private UserDB userDB;
+    private SongData songData;
 
-    public ArtistController(Artist artist){
+    public ArtistController(Artist artist, UserDB userDB, SongData songData) {
         this.artist = artist;
+        this.userDB = userDB;
+        this.songData = songData;
     }
 
-    SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
-
-    UserDB userDB = loadSaveUsersToJson.loadUsers(Constants.USERS_JSON_PATH);
-
-    public boolean checkIfSongExists(String songName){
-        for(Songs song: songData.getSongsList()){
-            if(song.getName().equals(songName)){
+    public boolean checkIfSongExists(String songName) {
+        for (Songs song : songData.getSongsList()) {
+            if (song.getName().equals(songName)) {
                 return true;
             }
         }
@@ -37,11 +33,9 @@ public class ArtistController {
     public void addSongToJson(String songName) {
         Songs newSong = new Songs(songName, artist);
         songData.getSongsList().add(newSong);
-        loadSongs.saveSongs(Constants.SONG_JSON_PATH, songData);
     }
 
     public void printArtistSongs(Artist artist) {
-        SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
         for (Songs song : songData.getSongsList()) {
             if (song.getArtistName().equals(artist.getUsername())) {
                 System.out.println("Your songs: ");
@@ -50,7 +44,7 @@ public class ArtistController {
         }
     }
 
-    public List<Artist> showMostListened(){
+    public List<Artist> showMostListened() {
         List<Artist> artistList = userDB.getUsersList().stream()
                 .filter(users -> users instanceof Artist)
                 .map(users -> (Artist) users)

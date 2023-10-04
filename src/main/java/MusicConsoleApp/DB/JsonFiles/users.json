@@ -1,0 +1,18 @@
+{
+  "usersList": [
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$1Mf5ctMc7WjaPwmbPksn1..CF7TrGARHM60KUjz2TmJ9MYekybNVq",
+      "userType": "CLIENT"
+    }
+  ]
+}

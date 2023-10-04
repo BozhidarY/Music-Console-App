@@ -1,10 +1,9 @@
 package MusicConsoleApp.View;
 
-import MusicConsoleApp.Controller.FileHandling.LoadSongs;
-import MusicConsoleApp.Controller.SongData;
-import MusicConsoleApp.Controller.SongRemainingTime;
-import MusicConsoleApp.Controller.UserControllers.ClientController;
-import MusicConsoleApp.Controller.UserDB;
+import MusicConsoleApp.Controller.ClientController;
+
+import MusicConsoleApp.DB.FileHandling.LoadSaveSongs;
+import MusicConsoleApp.DB.SongData;
 import MusicConsoleApp.Models.Constants;
 import MusicConsoleApp.Models.Playlist;
 import MusicConsoleApp.Models.Songs;
@@ -15,17 +14,17 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ClientView {
-    private ClientController clientController;
     Scanner scanner = new Scanner(System.in);
-    LoadSongs loadSongs = new LoadSongs();
-    SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
+    LoadSaveSongs loadSaveSongs = new LoadSaveSongs();
+    SongData songData = loadSaveSongs.loadFromFile(Constants.SONG_JSON_PATH);
     SongRemainingTime songRemainingTime = new SongRemainingTime();
+    private ClientController clientController;
 
-    public ClientView(ClientController clientController){
+    public ClientView(ClientController clientController) {
         this.clientController = clientController;
     }
 
-    public void openClientCommunication(UserDB userDB) {
+    public void openClientCommunication() {
 
         System.out.println("Welcome " + clientController.getClient().getUsername() + ". There re 3 modes to operate in this app.\nThe first mode is that" +
                 " you can listen to music. \nSecond one - change and add playlists to your library and \nthe third" +
@@ -42,18 +41,18 @@ public class ClientView {
                     switch (listenChoice.toUpperCase()) {
                         case "SEARCH" -> {
                             List<Songs> filteredSongs = caseSearchInSongDatabase();
-                            if(filteredSongs != null){
+                            if (filteredSongs != null) {
                                 listenSong(filteredSongs);
                             }
                         }
                         case "RANDOM" -> {
-                            Songs song = clientController.randomSong(songData);
+                            Songs song = clientController.randomSong();
                             System.out.println("Now playing: " + song);
                             visualizeSongRemainingTime(song);
                         }
                         case "PLAYLIST" -> {
                             Playlist playlist = checkIfPlaylistExists();
-                            if(playlist != null){
+                            if (playlist != null) {
                                 checkIfSongInPlaylistExists(playlist);
                             }
                         }
@@ -78,13 +77,13 @@ public class ClientView {
                         }
                         case "ADDSONG" -> {
                             Playlist playlist = checkIfPlaylistExists();
-                            if(playlist != null){
+                            if (playlist != null) {
                                 addSongInPlaylist(playlist);
                             }
                         }
                         case "DELETESONG" -> {
                             Playlist playlist = checkIfPlaylistExists();
-                            if(playlist != null){
+                            if (playlist != null) {
                                 deleteSong(playlist);
                             }
                         }
@@ -97,17 +96,16 @@ public class ClientView {
                     System.out.println("If you have 2 accounts you can import the library from your other account to this account" +
                             "You only need an username and password of the other account" +
                             "Note: You can have only one library, so if you want to import, your current library will be overwritten");
-                    importLibrary(userDB);
+                    importLibrary();
                 }
                 default -> {
                     System.out.println("Invalid Input");
                 }
                 case "INBOX" -> {
-                    HashMap<String, Integer> favouriteArtist = clientController.favouriteArtist(userDB);
-                    if(favouriteArtist.isEmpty()){
+                    HashMap<String, Integer> favouriteArtist = clientController.favouriteArtist();
+                    if (favouriteArtist.isEmpty()) {
                         System.out.println("You still haven't listened to anyone");
-                    }
-                    else{
+                    } else {
                         System.out.println("HashMap Contents:");
                         for (Map.Entry<String, Integer> entry : favouriteArtist.entrySet()) {
                             String key = entry.getKey();
@@ -117,43 +115,42 @@ public class ClientView {
                     }
                 }
             }
-            clientController.artistDataChange(songData, userDB);
-            loadSongs.saveSongs(Constants.SONG_JSON_PATH, songData);
+            clientController.artistDataChange();
+            loadSaveSongs.saveSongs(Constants.SONG_JSON_PATH, songData);
             System.out.println("Choose a new mode or exit the programm(Listen, Edit, Import, Exit)");
             choice = scanner.nextLine();
         }
     }
 
-    public List<Songs> caseSearchInSongDatabase(){
+    public List<Songs> caseSearchInSongDatabase() {
         System.out.println("Search a song to listen to:");
         System.out.print("Search Bar: ");
         String searchWord = scanner.nextLine();
-        List<Songs> filteredSongs = clientController.searchMenu(songData, searchWord);
-        for(Songs song: filteredSongs){
+        List<Songs> filteredSongs = clientController.searchMenu(searchWord);
+        for (Songs song : filteredSongs) {
             System.out.println(song);
         }
         if (filteredSongs.isEmpty()) {
             System.out.println("No songs with this name. Do you want to try again? ");
             String choice = scanner.nextLine();
-            if(choice.equals("Y")){
+            if (choice.equals("Y")) {
                 caseSearchInSongDatabase();
-            }
-            else{
+            } else {
                 return null;
             }
         }
         return filteredSongs;
 
     }
-    public void listenSong(List<Songs> filteredSongs){
+
+    public void listenSong(List<Songs> filteredSongs) {
         System.out.println("Choose which song to play");
         String choiceSong = scanner.nextLine();
         Songs song = clientController.SongByChoice(filteredSongs, choiceSong);
-        if(song == null){
+        if (song == null) {
             System.out.println("Wrong song name. Try again");
             listenSong(filteredSongs);
-        }
-        else{
+        } else {
             visualizeSongRemainingTime(song);
         }
     }
@@ -175,82 +172,76 @@ public class ClientView {
     public void checkIfSongInPlaylistExists(Playlist choosenPlaylist) {
         if (choosenPlaylist.getSongPlaylist().isEmpty()) {
             System.out.println("No added songs in this playlist");
-        }
-        else {
+        } else {
             System.out.println("Which song do you want to play?");
             String songChoice = scanner.nextLine();
             Songs song = clientController.searchSongInPlaylist(choosenPlaylist, songChoice);
             if (song == null) {
                 System.out.println("Wrong name. Try again");
                 checkIfSongInPlaylistExists(choosenPlaylist);
-            }
-            else {
+            } else {
                 visualizeSongRemainingTime(song);
             }
         }
     }
 
-    public void deletePlaylist(){
+    public void deletePlaylist() {
         System.out.println("Which playlist to delete");
         String playlistName = scanner.nextLine();
-        if(clientController.deletePlaylist(playlistName)){
+        if (clientController.deletePlaylist(playlistName)) {
             System.out.println("Playlist deleted");
-        }
-        else{
+        } else {
             System.out.println("No playlist found. Try again.");
             String choice = scanner.nextLine();
-            if(choice.equals("Y")){
+            if (choice.equals("Y")) {
                 deletePlaylist();
             }
         }
     }
 
-    public void addSongInPlaylist(Playlist choosenPlaylist){
+    public void addSongInPlaylist(Playlist choosenPlaylist) {
         System.out.println("Which song to add");
         String songChoice = scanner.nextLine();
-        if(clientController.addSong(choosenPlaylist, songChoice, songData)){
+        if (clientController.addSong(choosenPlaylist, songChoice)) {
             System.out.println("Success");
-        }
-        else{
+        } else {
             System.out.println("No such song. Try again.");
             String choice = scanner.nextLine();
-            if(choice.equals("Y")){
+            if (choice.equals("Y")) {
                 addSongInPlaylist(choosenPlaylist);
             }
         }
     }
 
-    public void deleteSong(Playlist choosenPlaylist){
+    public void deleteSong(Playlist choosenPlaylist) {
         System.out.println("Which song to delete");
         String songChoice = scanner.nextLine();
-        if(!clientController.deleteSong(choosenPlaylist, songChoice)){
+        if (!clientController.deleteSong(choosenPlaylist, songChoice)) {
             System.out.println("No songs with that name found. Try again?");
             String choice = scanner.nextLine();
-            if(choice.equals("Y")){
+            if (choice.equals("Y")) {
                 deleteSong(choosenPlaylist);
             }
-        }
-        else {
+        } else {
             System.out.println("Success");
         }
     }
 
-    public void importLibrary(UserDB userDB){
+    public void importLibrary() {
         System.out.println("Enter username");
         String username = scanner.nextLine();
-        if(!clientController.importLibrary(userDB, username)){
-            System.out.println("No user with that anme found. Do you want to try again?");
+        if (!clientController.importLibrary(username)) {
+            System.out.println("No user with that name found. Do you want to try again?");
             String choice = scanner.nextLine();
-            if(choice.equals("Y")){
-                importLibrary(userDB);
+            if (choice.equals("Y")) {
+                importLibrary();
             }
-        }
-        else{
+        } else {
             System.out.println("Success");
         }
     }
 
-    public void visualizeSongRemainingTime(Songs song){
+    public void visualizeSongRemainingTime(Songs song) {
         songRemainingTime.stopwatch(song, scanner);
         song.setTimesListened(song.getTimesListened() + 1);
     }

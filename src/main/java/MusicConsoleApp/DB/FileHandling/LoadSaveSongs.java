@@ -1,7 +1,6 @@
-package MusicConsoleApp.Controller.FileHandling;
+package MusicConsoleApp.DB.FileHandling;
 
-import MusicConsoleApp.Controller.SongData;
-import MusicConsoleApp.Controller.UserDB;
+import MusicConsoleApp.DB.SongData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -12,11 +11,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class LoadSongs {
+public class LoadSaveSongs {
+    private static final Logger logger = (Logger) LogManager.getLogger(LoadSaveSongs.class);
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String fileNameError;
     Scanner scanner = new Scanner(System.in);
-    private static final Logger logger = (Logger) LogManager.getLogger(LoadSongs.class);
 
     public SongData loadFromFile(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {

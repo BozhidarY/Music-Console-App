@@ -1,7 +1,5 @@
-package MusicConsoleApp.Controller;
+package MusicConsoleApp.DB;
 
-import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
-import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Models.Users;
 
 import java.util.ArrayList;
@@ -14,12 +12,9 @@ public class UserDB {
         this.usersList = new ArrayList<>();
     }
 
-
-
     public List<Users> getUsersList() {
         return usersList;
     }
-
 
 
 }

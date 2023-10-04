@@ -739,3 +739,78 @@
 2023-10-01 16:02:50,969 [main] INFO  MusicConsoleApp.View.SignUpMenu - The admin has been loggined: username=admin
 2023-10-01 16:02:59,341 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
 2023-10-01 16:03:15,985 [main] INFO  MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 13:30:26,347 [main] INFO  MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 13:31:14,499 [main] ERROR MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 13:32:59,608 [main] ERROR MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 13:33:18,545 [main] INFO  MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 13:33:30,769 [main] ERROR MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 13:33:34,066 [main] ERROR MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 13:33:39,137 [main] INFO  MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 13:33:56,778 [main] INFO  MusicConsoleApp.FileHandling.LoadSaveUsersToJson - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 13:34:03,533 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:23:27,973 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:23:28,000 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:23:35,110 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:23:51,972 [main] ERROR MusicConsoleApp.Controller.DBController.LoadUsersController - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:24:01,007 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:24:01,025 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:24:02,822 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:24:02,825 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:24:11,660 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:24:11,688 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:24:22,862 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:24:22,889 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:24:31,858 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:24:31,879 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:24:44,988 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:25:07,736 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:25:07,767 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:25:15,722 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:25:32,849 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:25:32,872 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:25:53,200 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:25:53,209 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:26:00,812 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:26:00,835 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:26:17,725 [main] INFO  MusicConsoleApp.View.SignUpMenu - User registered successfully: username=boj as CLIENT
+2023-10-04 15:26:36,715 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:26:36,716 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:27:55,158 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:27:55,184 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:28:02,486 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:28:02,490 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:28:08,910 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:28:08,936 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:28:19,106 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:28:28,146 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:28:28,147 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:28:46,769 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:28:46,800 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:28:49,910 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:28:56,350 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:28:56,352 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:31:58,558 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:31:58,587 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:32:10,439 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/user.json
+2023-10-04 15:32:10,467 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:33:38,314 [main] ERROR MusicConsoleApp.Controller.DBController.LoadUsersController - Failed to load from file src/main/java/MusicConsoleApp/Controller/Jsoiles/users.json
+2023-10-04 15:33:47,431 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:33:47,447 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:33:51,366 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:34:12,238 [main] ERROR MusicConsoleApp.Controller.DBController.LoadUsersController - Failed to save in file src/main/java/MusicConsoleApp/Controller/Jsoiles/users.json
+2023-10-04 15:34:12,239 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:35:19,156 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:35:19,185 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed loaded from src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 15:35:26,300 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 15:35:45,588 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 15:35:45,589 [main] INFO  MusicConsoleApp.Controller.DBController.LoadUsersController - Users have beed succesfully saved in src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 17:29:05,040 [main] ERROR MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/users.json
+2023-10-04 17:29:18,486 [main] INFO  MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Users have beed loaded from src/main/java/MusicConsoleApp/DB/JsonFiles/users.json
+2023-10-04 17:29:18,500 [main] ERROR MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Failed to load from file src/main/java/MusicConsoleApp/Controller/JsonFiles/deletedProfiles.json
+2023-10-04 17:29:36,811 [main] INFO  MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Users have beed loaded from src/main/java/MusicConsoleApp/DB/JsonFiles/users.json
+2023-10-04 17:29:36,813 [main] ERROR MusicConsoleApp.DB.FileHandling.LoadSongs - Failed to load songs from file src/main/java/MusicConsoleApp/Controller/JsonFiles/songsFile.json
+2023-10-04 17:30:25,955 [main] INFO  MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Users have beed loaded from src/main/java/MusicConsoleApp/DB/JsonFiles/users.json
+2023-10-04 17:30:25,980 [main] INFO  MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Users have beed loaded from src/main/java/MusicConsoleApp/DB/JsonFiles/deletedProfiles.json
+2023-10-04 17:30:33,362 [main] INFO  MusicConsoleApp.View.SignUpMenu - User has loggined: username=boj
+2023-10-04 17:30:50,617 [main] INFO  MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Users have beed succesfully saved in src/main/java/MusicConsoleApp/DB/JsonFiles/users.json
+2023-10-04 17:30:50,618 [main] INFO  MusicConsoleApp.DB.FileHandling.LoadSaveUsers - Users have beed succesfully saved in src/main/java/MusicConsoleApp/DB/JsonFiles/deletedProfiles.json

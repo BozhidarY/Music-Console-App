@@ -10,18 +10,6 @@ public class Artist extends Users {
         setUserType(UserType.ARTIST);
     }
 
-    public void listenToSong() {
-        this.totalViews++;
-    }
-
-//    public List<Songs> getSongsList() {
-//        return songsList;
-//    }
-//
-//    public void setSongsList(List<Songs> songsList) {
-//        this.songsList = songsList;
-//    }
-
     public long getTotalViews() {
         return totalViews;
     }
