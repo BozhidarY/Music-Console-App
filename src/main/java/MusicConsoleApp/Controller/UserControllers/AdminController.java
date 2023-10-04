@@ -19,28 +19,52 @@ public class AdminController {
         this.admin = admin;
     }
 
-    public void deleteAccount(UserDB userDB, String userName) {
-        UserDB userDB1 = new UserDB();
-        List<Users> removedAccounts = new ArrayList<>();
-        userDB.getUsersList().forEach(user -> {
-            if (userName.equals(user.getUsername())) {
-                removedAccounts.add(user);
-                userDB1.getUsersList().add(user);
 
-            }
-        });
-        userDB.getUsersList().removeAll(removedAccounts);
-        loadSaveUsersToJson.saveUsers(Constants.DELETEDUSERS_JSON_PATH, userDB1);
-    }
-
-    public void recoverAccount(UserDB userDB, String nameAcc) {
-        UserDB userDB1;
-        userDB1 = loadSaveUsersToJson.loadUsers(Constants.DELETEDUSERS_JSON_PATH);
-        for (Users user : userDB1.getUsersList()) {
-            if (nameAcc.equals(user.getUsername())) {
-                userDB.getUsersList().add(user);
+    public boolean dublicationCheck(String userName, UserDB userDB){
+        for(Users user: userDB.getUsersList()){
+            if(user.getUsername().equals(userName)){
+                return false;
             }
         }
+        return true;
+    }
+
+    public boolean deleteAccount(String userName, UserDB userDB) {
+        UserDB userDB1 = loadSaveUsersToJson.loadUsers(Constants.DELETEDUSERS_JSON_PATH);
+        List<Users> removedAccounts = new ArrayList<>();
+        for(Users user: userDB.getUsersList()){
+            if(user.getUsername().equals(userName)){
+                if(!dublicationCheck(userName, userDB1)){
+                    return false;
+                }
+                else{
+                    userDB1.getUsersList().add(user);
+                    removedAccounts.add(user);
+                }
+            }
+        }
+        if(removedAccounts.isEmpty()){
+            return false;
+        }
+        else{
+            userDB.getUsersList().removeAll(removedAccounts);
+            loadSaveUsersToJson.saveUsers(Constants.DELETEDUSERS_JSON_PATH, userDB1);
+            return true;
+        }
+
+    }
+
+    public boolean recoverAccount(String nameAcc, UserDB userDB) {
+        UserDB userDB1 = loadSaveUsersToJson.loadUsers(Constants.DELETEDUSERS_JSON_PATH);
+        for (Users user : userDB1.getUsersList()) {
+            if (nameAcc.equals(user.getUsername()) && dublicationCheck(nameAcc, userDB)) {
+                userDB.getUsersList().add(user);
+                userDB1.getUsersList().remove(user);
+                loadSaveUsersToJson.saveUsers(Constants.DELETEDUSERS_JSON_PATH, userDB1);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Admin getAdmin() {

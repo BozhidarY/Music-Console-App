@@ -3,12 +3,12 @@ package MusicConsoleApp.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Playlists {
+public class Playlist {
 
     private String playlistName;
     private List<Songs> songPlaylist;
 
-    public Playlists(String playlistName) {
+    public Playlist(String playlistName) {
         this.playlistName = playlistName;
         this.songPlaylist = new ArrayList<>();
     }

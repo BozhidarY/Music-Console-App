@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 public class AdminView {
     Scanner scanner = new Scanner(System.in);
-    LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
     private AdminController adminController;
 
     public AdminView(AdminController adminController){
@@ -26,15 +25,40 @@ public class AdminView {
         String choice = scanner.nextLine();
         switch (choice) {
             case "Recover" -> {
-                System.out.println("What account you want to recover");
-                String accountName = scanner.nextLine();
-                adminController.recoverAccount(userDB, accountName);
+                recoverUser(userDB);
             }
             case "Delete" -> {
-                System.out.println("Enter account username you want to remove");
-                String accountName = scanner.nextLine();
-                adminController.deleteAccount(userDB, accountName);
+                deleteUser(userDB);
             }
+        }
+    }
+
+    public void recoverUser(UserDB userDB){
+        System.out.println("What account you want to recover");
+        String accountName = scanner.nextLine();
+        if(!adminController.recoverAccount(accountName, userDB )){
+            System.out.println("No user with that name found. Do you want to try again?");
+            String choice = scanner.nextLine();
+            if(choice.equals("Y")){
+                recoverUser(userDB);
+            }
+        }
+        else{
+            System.out.println("Success");
+        }
+    }
+    public void deleteUser(UserDB userDB){
+        System.out.println("Enter account username you want to remove");
+        String accountName = scanner.nextLine();
+        if(!adminController.deleteAccount(accountName, userDB)){
+            System.out.println("No user with that name found. Do you want to try again?");
+            String choice = scanner.nextLine();
+            if(choice.equals("Y")){
+                deleteUser(userDB);
+            }
+        }
+        else {
+            System.out.println("Success");
         }
     }
 

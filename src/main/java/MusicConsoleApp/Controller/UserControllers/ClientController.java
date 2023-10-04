@@ -1,24 +1,16 @@
 package MusicConsoleApp.Controller.UserControllers;
 
-import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserDB;
 import MusicConsoleApp.Models.*;
 import MusicConsoleApp.Controller.SongRemainingTime;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientController {
-    Scanner scanner = new Scanner(System.in);
-    SongRemainingTime songRemainingTime = new SongRemainingTime();
-    LoadSongs loadSongs = new LoadSongs();
-
     private Client client;
-    private UserDB userDB;
-    private SongData songData;
 
     public ClientController(Client client){
         this.client = client;
@@ -40,25 +32,12 @@ public class ClientController {
         return null;
     }
 
-    public void visualizeSongRemainingTime(Songs song){
-        songRemainingTime.stopwatch(song, scanner);
-        song.setTimesListened(song.getTimesListened() + 1);
-    }
-
 
     public Songs randomSong(SongData songData) {
         Random random = new Random();
         int randomIndex = random.nextInt(songData.getSongsList().size());
         Songs currentSong = songData.getSongsList().get(randomIndex);
         return currentSong;
-    }
-
-    public void songDataChange(Songs song, SongData songData){
-        for(Songs songFromData: songData.getSongsList()){
-            if(song.getName().equals(songFromData.getName())){
-                songFromData.setTimesListened(songFromData.getTimesListened() + 1);
-            }
-        }
     }
     public void artistDataChange(SongData songData, UserDB userDB){
         for(Users user: userDB.getUsersList()){
@@ -74,8 +53,8 @@ public class ClientController {
         }
     }
 
-    public Playlists searchPlaylist(String playlistChoice) {
-        for(Playlists playlist: client.getLibrary().getLibraryList()){
+    public Playlist searchPlaylist(String playlistChoice) {
+        for(Playlist playlist: client.getLibrary().getLibraryList()){
             if(playlistChoice.equals(playlist.getPlaylistName())){
                 return playlist;
             }
@@ -83,8 +62,8 @@ public class ClientController {
         return null;
     }
 
-    public Songs searchSongInPlaylist(Playlists playlists, String choiceSong){
-            for(Songs song: playlists.getSongPlaylist()){
+    public Songs searchSongInPlaylist(Playlist playlist, String choiceSong){
+            for(Songs song: playlist.getSongPlaylist()){
                 if(song.getName().equals(choiceSong)){
                     return song;
                 }
@@ -93,53 +72,68 @@ public class ClientController {
     }
 
     public void addPlaylist(String playlistName) {
-        Playlists playlist = new Playlists(playlistName);
+        Playlist playlist = new Playlist(playlistName);
         client.getLibrary().getLibraryList().add(playlist);
     }
 
-    public void deletePlaylist(String playlistName) {
-        List<Playlists> removedPlaylists = new ArrayList<>();
-        for (Playlists playlists : client.getLibrary().getLibraryList()) {
-            if (playlistName.equals(playlists.getPlaylistName())) {
-                removedPlaylists.add(playlists);
+    public boolean deletePlaylist(String playlistName) {
+        List<Playlist> removedPlaylists = new ArrayList<>();
+        for (Playlist playlist : client.getLibrary().getLibraryList()) {
+            if (playlistName.equals(playlist.getPlaylistName())) {
+                removedPlaylists.add(playlist);
             }
         }
-        client.getLibrary().getLibraryList().removeAll(removedPlaylists);
+        if(removedPlaylists.isEmpty()){
+            return false;
+        }
+        else{
+            client.getLibrary().getLibraryList().removeAll(removedPlaylists);
+            return true;
+        }
     }
 
-//    public void choosePlaylis
-
-    public void addSong(Playlists playlist, String songName, SongData songData) {
+    public boolean addSong(Playlist playlist, String songName, SongData songData) {
         for(Songs song: songData.getSongsList()){
             if (song.getName().equals(songName)) {
                 playlist.getSongPlaylist().add(song);
+                return true;
             }
         }
+        return false;
     }
 
-    public void deleteSong(Playlists playlist, String songName) {
+    public boolean deleteSong(Playlist playlist, String songName) {
         List<Songs> deletedSongs = new ArrayList<>();
         for (Songs song : playlist.getSongPlaylist()) {
             if (song.getName().equals(songName)) {
                 deletedSongs.add(song);
             }
         }
-        playlist.getSongPlaylist().removeAll(deletedSongs);
+        if(deletedSongs.isEmpty()){
+            return false;
+        }
+        else {
+            System.out.println("Success");
+            playlist.getSongPlaylist().removeAll(deletedSongs);
+            return true;
+        }
     }
 
-    public void importLibrary(UserDB userDB, String username) {
+    public boolean importLibrary(UserDB userDB, String username) {
         for(Users user: userDB.getUsersList()){
             if(user instanceof Client importClient && user.getUsername().equals(username)){
                 client.setLibrary(importClient.getLibrary());
+                return true;
             }
         }
+        return false;
     }
 
     public HashMap<String, Integer> favouriteArtist(UserDB userDB){
         HashMap<String,Integer> favouriteArtist = new HashMap<>();
         for(Users user:userDB.getUsersList()){
             if(user instanceof Client client){
-                for(Playlists playlist:client.getLibrary().getLibraryList()){
+                for(Playlist playlist:client.getLibrary().getLibraryList()){
                     for(Songs song: playlist.getSongPlaylist()){
                         favouriteArtist.put(song.getArtistName(), favouriteArtist.getOrDefault(song.getArtistName(), 0) + song.getTimesListened());
                     }
@@ -157,35 +151,6 @@ public class ClientController {
     public void setClient(Client client) {
         this.client = client;
     }
-
-    //    public void likeSong(Client client, Songs song) {
-//        boolean result = false;
-//        System.out.println("Did you like the song? (Y/N)");
-//        String likeChoice = scanner.nextLine();
-//        if (likeChoice.equals("Y")) {
-//            for (Playlists playlists : client.getLibrary().getLibraryList()) {
-//                if (playlists.getPlaylistName().equals("Like playlist")) {
-////                    song.setLiked(true);
-//                    playlists.getSongPlaylist().add(song);
-//                    result = true;
-//                }
-//            }
-//            if (!result) {
-//                Playlists playlists = new Playlists("Like playlist");
-//                client.getLibrary().getLibraryList().add(playlists);
-////                song.setLiked(true);
-//                playlists.getSongPlaylist().add(song);
-//            }
-//        } else if (likeChoice.equals("N")) {
-////            song.setLiked(false);
-//            for (Playlists playlists : client.getLibrary().getLibraryList()) {
-//                if (playlists.getPlaylistName().equals("Like playlist")) {
-//                    playlists.getSongPlaylist().remove(song);
-//                    System.out.println("Success");
-//                }
-//            }
-//        }
-//    }
 }
 
 

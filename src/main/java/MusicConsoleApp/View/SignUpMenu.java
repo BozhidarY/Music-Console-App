@@ -1,13 +1,10 @@
 package MusicConsoleApp.View;
 
-
-
-import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserControllers.AdminController;
 import MusicConsoleApp.Controller.UserControllers.ArtistController;
 import MusicConsoleApp.Controller.UserControllers.ClientController;
+import MusicConsoleApp.Controller.UserControllers.SignMenuController;
 import MusicConsoleApp.Controller.UserDB;
-import MusicConsoleApp.Exceptions.Validators;
 import MusicConsoleApp.Models.Admin;
 import MusicConsoleApp.Models.Artist;
 import MusicConsoleApp.Models.Client;
@@ -20,54 +17,47 @@ import java.util.Scanner;
 
 //import static MusicConsoleApp.Models.Admin.admin;
 
-public class LoginRegisterMenu {
+public class SignUpMenu {
     Scanner scanner = new Scanner(System.in);
-    Validators validators = new Validators();
+    private SignMenuController signMenuController;
 
-    private final Logger logger = (Logger) LogManager.getLogger(LoginRegisterMenu.class);
+    private final Logger logger = (Logger) LogManager.getLogger(SignUpMenu.class);
+
+    public SignUpMenu(SignMenuController signMenuController){
+        this.signMenuController = signMenuController;
+    }
 
     public void login(UserDB userDB) {
-        boolean hasLoginOccured = false;
-
         System.out.println("Login Form: ");
         System.out.println("Enter username");
         String username = scanner.nextLine();
         System.out.println("Enter password");
         String password = scanner.nextLine();
 
-        for (Users user : userDB.getUsersList()) {
-            if (user.getUsername().equals(username)) {
-                BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
-                if(result.verified){
-                    if (user instanceof Artist artist) {
-                        hasLoginOccured = true;
-                        logger.info("User has loggined: username={}", username);
-                        ArtistController artistController = new ArtistController(artist);
-                        ArtistView artistView = new ArtistView(artistController);
-                        artistView.openArtistCommunication(userDB);
-                    } else if (user instanceof Client client) {
-                        hasLoginOccured = true;
-                        logger.info("User has loggined: username={}", username);
-                        ClientController clientController = new ClientController(client);
-                        ClientView clientView = new ClientView(clientController);
-                        clientView.openClientCommunication(userDB);
-                    }
-                }
-            }
+        Users user = signMenuController.checkIfUserExists(username, password);
+        if (user instanceof Artist artist) {
+            logger.info("User has loggined: username={}", username);
+            ArtistController artistController = new ArtistController(artist);
+            ArtistView artistView = new ArtistView(artistController);
+            artistView.openArtistCommunication();
+        } else if (user instanceof Client client) {
+            logger.info("User has loggined: username={}", username);
+            ClientController clientController = new ClientController(client);
+            ClientView clientView = new ClientView(clientController);
+            clientView.openClientCommunication(userDB);
         }
-        if (username.equals(Admin.getAdmin().getUsername()) && password.equals(Admin.getAdmin().getPassword())) {
-            hasLoginOccured = true;
+        else if(user instanceof Admin){
             logger.info("The admin has been loggined: username={}", username);
             AdminController adminController = new AdminController(Admin.getAdmin());
             AdminView adminView = new AdminView(adminController);
             adminView.openAdminCommunication(userDB);
         }
-        if (!hasLoginOccured) {
-            System.out.println("No such credentials. You need to register");
-            register(userDB);
+        else if(user == null){
+            System.out.println("The user with this credentials doesn't exist. Do you want to register or try again?");
+            String choice = scanner.nextLine();
+            chooseSignInOption(userDB,choice);
         }
     }
-
     public void register(UserDB userDB) {
         System.out.println("Register Form: ");
         System.out.println("Enter username");
@@ -75,30 +65,33 @@ public class LoginRegisterMenu {
         System.out.println("Enter password");
         String password = scanner.nextLine();
         String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-        boolean dublicationCheck = false;
 
-        for (Users user : userDB.getUsersList()) {
-            if (user.getUsername().equals(username)) {
-                System.out.println("The username is taken");
-                dublicationCheck = true;
-            }
+        if(!signMenuController.checkDublicateUser(username)){
+            System.out.println("Username is taken. Try again or go to login(Register/ Login)");
+            String choice = scanner.nextLine();
+            chooseSignInOption(userDB, choice);
         }
-        if (!dublicationCheck && validators.validateUsername(username) && validators.validatePassword(password)) {
+        else if(!signMenuController.validateUserCredentials(username, password)){
+            System.out.println("Try again or go to login(Register/ Login)");
+            String choice = scanner.nextLine();
+            chooseSignInOption(userDB, choice);
+        }
+        else {
             System.out.println("Do you want to create Client or Artist account.\n (Client/Artist)");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "Artist" -> {
                     Artist artist = new Artist(username, hashedPassword);
-                    userDB.getUsersList().add(artist);
+                    signMenuController.getUserDB().getUsersList().add(artist);
                     System.out.println("You have registered successfully");
                     logger.info("User registered successfully: username={} as {}", username, artist.getUserType() );
                     ArtistController artistController = new ArtistController(artist);
                     ArtistView artistView = new ArtistView(artistController);
-                    artistView.openArtistCommunication(userDB);
+                    artistView.openArtistCommunication();
                 }
                 case "Client" -> {
                     Client client = new Client(username, hashedPassword);
-                    userDB.getUsersList().add(client);
+                    signMenuController.getUserDB().getUsersList().add(client);
                     System.out.println("You have registered successfully");
                     logger.info("User registered successfully: username={} as {}", username, client.getUserType() );
                     ClientController clientController = new ClientController(client);
@@ -106,15 +99,17 @@ public class LoginRegisterMenu {
                     clientView.openClientCommunication(userDB);
                 }
             }
-        } else {
-            System.out.println("Try register again or go to login form(Register/Login)");
-            logger.warn("Registration failed due to duplicate username: username={}", username);
-            String choice = scanner.nextLine();
-            if (choice.equals("Register")) {
-                register(userDB);
-            } else if (choice.equals("Login")) {
-                login(userDB);
-            }
+        }
+    }
+    public void chooseSignInOption(UserDB userDB, String choice){
+        if(choice.equals("Login")){
+            login(userDB);
+        }
+        else if(choice.equals("Register")){
+            register(userDB);
+        }
+        else {
+            System.out.println("Wrong command. Program exiting.");
         }
     }
 }

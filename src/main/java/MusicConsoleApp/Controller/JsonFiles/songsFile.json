@@ -52,7 +52,7 @@
       "name": "asd",
       "artistName": "Taylor",
       "duration": "0:05",
-      "timesListened": 4
+      "timesListened": 6
     },
     {
       "name": "Exit",
@@ -63,6 +63,12 @@
     {
       "name": "",
       "artistName": "singer",
+      "duration": "0:05",
+      "timesListened": 0
+    },
+    {
+      "name": "song100",
+      "artistName": "singer11",
       "duration": "0:05",
       "timesListened": 0
     }

@@ -12,10 +12,28 @@
             "songPlaylist": []
           }
         ],
-        "libraryName": "test2 library"
+        "libraryName": "test library"
       },
-      "username": "test2",
-      "password": "$2a$12$4.Se7QYeRDeHDP3TrxcuMupqlnsJZEBFDw/kd9YFT49Vp2mqFEG1u",
+      "username": "test",
+      "password": "$2a$12$VgWN6yWkX8gFpe9oUgyE/uQyuo6.QOmjoC93.22advoVhiGn.Ah7m",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
       "userType": "CLIENT"
     }
   ]

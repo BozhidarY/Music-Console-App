@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Library {
 
-    private List<Playlists> libraryPlaylists;
+    private List<Playlist> libraryPlaylists;
 
     private String libraryName;
 
@@ -14,11 +14,11 @@ public class Library {
         this.libraryName = libraryName;
     }
 
-    public List<Playlists> getLibraryList() {
+    public List<Playlist> getLibraryList() {
         return libraryPlaylists;
     }
 
-    public void setLibraryList(List<Playlists> libraryList) {
+    public void setLibraryList(List<Playlist> libraryList) {
         this.libraryPlaylists = libraryList;
     }
 

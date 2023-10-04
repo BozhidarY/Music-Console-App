@@ -1,7 +1,7 @@
 {
   "usersList": [
     {
-      "totalViews": 23,
+      "totalViews": 0,
       "username": "Taylor",
       "password": "$2a$12$9t.4Q0M89WvboCf6Mqx1feDvRo8msdeYdaSIST/QD5mU4HqOr3hBO",
       "userType": "ARTIST"
@@ -11,27 +11,6 @@
       "username": "Singer2",
       "password": "$2a$12$n0jGQ5NuHzQCaulff9wXrOEB5nwB0YSf32B/NuwpPpQofLOyhQdD2",
       "userType": "ARTIST"
-    },
-    {
-      "library": {
-        "libraryPlaylists": [
-          {
-            "playlistName": "defaultPlaylist",
-            "songPlaylist": [
-              {
-                "name": "asd",
-                "artistName": "Taylor",
-                "duration": "0:05",
-                "timesListened": 4
-              }
-            ]
-          }
-        ],
-        "libraryName": "boj library"
-      },
-      "username": "boj",
-      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
-      "userType": "CLIENT"
     },
     {
       "totalViews": 0,
@@ -92,6 +71,110 @@
       "username": "singer",
       "password": "$2a$12$UoqKa5igYuWnWf8GuIVRgeONjQM6clFqdlruyuRzj9CkdxDdG/vva",
       "userType": "ARTIST"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "go60 library"
+      },
+      "username": "go60",
+      "password": "$2a$12$7o3jgpBYIlHtMidGx1ZgVuWW1gohBabCzSvhh9fDnVqEypRKBoUPO",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": []
+          },
+          {
+            "playlistName": "p2",
+            "songPlaylist": []
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$sNxqYjOjopkJlVuMOpe2LewVIjqcIy/.hPs8RpD4mLliCO2cYq8SS",
+      "userType": "CLIENT"
     }
   ]
 }

@@ -1,7 +1,5 @@
 package MusicConsoleApp.Models;
 
-import MusicConsoleApp.Exceptions.WrongCredentialsException;
-
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Users {
 

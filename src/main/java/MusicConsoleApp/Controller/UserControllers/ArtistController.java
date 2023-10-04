@@ -1,5 +1,6 @@
 package MusicConsoleApp.Controller.UserControllers;
 
+import MusicConsoleApp.Controller.FileHandling.LoadSaveUsersToJson;
 import MusicConsoleApp.Controller.FileHandling.LoadSongs;
 import MusicConsoleApp.Controller.SongData;
 import MusicConsoleApp.Controller.UserDB;
@@ -14,12 +15,15 @@ import java.util.stream.Collectors;
 public class ArtistController {
     private Artist artist;
     LoadSongs loadSongs = new LoadSongs();
+    LoadSaveUsersToJson loadSaveUsersToJson = new LoadSaveUsersToJson();
 
     public ArtistController(Artist artist){
         this.artist = artist;
     }
 
     SongData songData = loadSongs.loadFromFile(Constants.SONG_JSON_PATH);
+
+    UserDB userDB = loadSaveUsersToJson.loadUsers(Constants.USERS_JSON_PATH);
 
     public boolean checkIfSongExists(String songName){
         for(Songs song: songData.getSongsList()){
@@ -46,7 +50,7 @@ public class ArtistController {
         }
     }
 
-    public List<Artist> showMostListened(UserDB userDB){
+    public List<Artist> showMostListened(){
         List<Artist> artistList = userDB.getUsersList().stream()
                 .filter(users -> users instanceof Artist)
                 .map(users -> (Artist) users)

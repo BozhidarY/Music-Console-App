@@ -1,7 +1,7 @@
 package MusicConsoleApp.Controller.FileHandling;
 
 import MusicConsoleApp.Models.Library;
-import MusicConsoleApp.Models.Playlists;
+import MusicConsoleApp.Models.Playlist;
 import MusicConsoleApp.Models.Songs;
 import MusicConsoleApp.Models.Artist;
 import MusicConsoleApp.Models.Client;
@@ -31,7 +31,7 @@ public class UserDeserializer implements JsonDeserializer<Users> {
             Library library = new Library(client.getUsername() + " library");
 
             JsonArray playlistsArray = libraryJson.getAsJsonArray("libraryPlaylists");
-            List<Playlists> playlistsList = new ArrayList<>();
+            List<Playlist> playlistList = new ArrayList<>();
 
             if (playlistsArray != null) {
                 for (JsonElement playlistElement : playlistsArray) {
@@ -48,13 +48,13 @@ public class UserDeserializer implements JsonDeserializer<Users> {
                             songPlaylist.add(song);
                         }
                     }
-                    Playlists playlists = new Playlists(playlistName);
+                    Playlist playlist = new Playlist(playlistName);
 
-                    playlists.setSongPlaylist(songPlaylist);
-                    playlistsList.add(playlists);
+                    playlist.setSongPlaylist(songPlaylist);
+                    playlistList.add(playlist);
                 }
             }
-            library.setLibraryList(playlistsList);
+            library.setLibraryList(playlistList);
             client.setLibrary(library);
             client.setUserType(userType);
 
