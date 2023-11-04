@@ -5,10 +5,10 @@ import MusicConsoleApp.Models.Songs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongData {
+public class SongDB {
     private final List<Songs> songs;
 
-    public SongData() {
+    public SongDB() {
         this.songs = new ArrayList<>();
     }
 

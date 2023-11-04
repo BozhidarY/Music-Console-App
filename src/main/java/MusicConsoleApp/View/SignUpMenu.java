@@ -45,7 +45,7 @@ public class SignUpMenu {
             logger.info("The admin has been loggined: username={}", username);
             AdminController adminController = new AdminController(Admin.getAdmin(), signMenuController.getUserDB(), signMenuController.getDeletedUsers());
             AdminView adminView = new AdminView(adminController);
-            adminView.openAdminCommunication();
+            adminView.openAdminCommunicationMenu();
         } else if (user == null) {
             System.out.println("The user with this credentials doesn't exist. Do you want to register or try again?");
             String choice = scanner.nextLine();
@@ -65,11 +65,20 @@ public class SignUpMenu {
             System.out.println("Username is taken. Try again or go to login(Register/ Login)");
             String choice = scanner.nextLine();
             chooseSignInOption(choice);
-        } else if (!signMenuController.validateUserCredentials(username, password)) {
-            System.out.println("Try again or go to login(Register/ Login)");
+        }else if (!signMenuController.validateUserUsername(username) && !signMenuController.validateUserPassword(password)) {
+            System.out.println("Both username and password dont match the regex. Try again or go to login(Register/ Login)");
             String choice = scanner.nextLine();
             chooseSignInOption(choice);
-        } else {
+        }
+        else if (!signMenuController.validateUserUsername(username)) {
+            System.out.println("Username doenst match the regex. Try again or go to login(Register/ Login)");
+            String choice = scanner.nextLine();
+            chooseSignInOption(choice);
+        } else if (!signMenuController.validateUserPassword(password)) {
+            System.out.println("Password doenst match the regex. Try again or go to login(Register/ Login)");
+            String choice = scanner.nextLine();
+            chooseSignInOption(choice);
+        }  else {
             System.out.println("Do you want to create Client or Artist account.\n (Client/Artist)");
             String choice = scanner.nextLine();
             switch (choice) {

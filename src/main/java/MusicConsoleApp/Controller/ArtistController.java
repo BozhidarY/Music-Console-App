@@ -1,11 +1,13 @@
 package MusicConsoleApp.Controller;
 
 
-import MusicConsoleApp.DB.SongData;
+import MusicConsoleApp.DB.SongDB;
 import MusicConsoleApp.DB.UserDB;
 import MusicConsoleApp.Models.Artist;
 import MusicConsoleApp.Models.Songs;
+import MusicConsoleApp.Models.Users;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,16 +15,16 @@ import java.util.stream.Collectors;
 public class ArtistController {
     private Artist artist;
     private UserDB userDB;
-    private SongData songData;
+    private SongDB songDB;
 
-    public ArtistController(Artist artist, UserDB userDB, SongData songData) {
+    public ArtistController(Artist artist, UserDB userDB, SongDB songDB) {
         this.artist = artist;
         this.userDB = userDB;
-        this.songData = songData;
+        this.songDB = songDB;
     }
 
     public boolean checkIfSongExists(String songName) {
-        for (Songs song : songData.getSongsList()) {
+        for (Songs song : songDB.getSongsList()) {
             if (song.getName().equals(songName)) {
                 return true;
             }
@@ -30,21 +32,12 @@ public class ArtistController {
         return false;
     }
 
-    public void addSongToJson(String songName) {
+    public void addSongToJsonFile(String songName) {
         Songs newSong = new Songs(songName, artist);
-        songData.getSongsList().add(newSong);
+        songDB.getSongsList().add(newSong);
     }
 
-    public void printArtistSongs(Artist artist) {
-        for (Songs song : songData.getSongsList()) {
-            if (song.getArtistName().equals(artist.getUsername())) {
-                System.out.println("Your songs: ");
-                System.out.println(song);
-            }
-        }
-    }
-
-    public List<Artist> showMostListened() {
+    public List<Artist> showMostListenedArtists() {
         List<Artist> artistList = userDB.getUsersList().stream()
                 .filter(users -> users instanceof Artist)
                 .map(users -> (Artist) users)

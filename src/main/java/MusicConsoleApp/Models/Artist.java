@@ -17,4 +17,11 @@ public class Artist extends Users {
     public void setTotalViews(long totalViews) {
         this.totalViews = totalViews;
     }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "totalViews=" + totalViews +
+                '}';
+    }
 }

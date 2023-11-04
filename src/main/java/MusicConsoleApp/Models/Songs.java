@@ -6,14 +6,12 @@ public class Songs {
     private String artistName;
     private String duration;
     private int timesListened;
-//    private boolean liked;
 
     public Songs(String name, Artist artist) {
         this.name = name;
         this.artistName = artist.getUsername();
         setDuration("0:05");
         this.timesListened = 0;
-//        setLiked(false);
     }
 
     public String getName() {
@@ -55,13 +53,6 @@ public class Songs {
     public void setArtistName(String artistName) {
         this.artistName = artistName;
     }
-    //    public boolean isLiked() {
-//        return liked;
-//    }
-//
-//    public void setLiked(boolean liked) {
-//        this.liked = liked;
-//    }
 
     @Override
     public String toString() {

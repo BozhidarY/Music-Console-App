@@ -56,22 +56,8 @@ public class UserDeserializer implements JsonDeserializer<Users> {
         } else if (userType == UserType.ARTIST) {
             Artist artist = new Artist(username, password);
 
-            JsonElement monthlyListenersElement = jsonObject.get("Listeners");
-            if (monthlyListenersElement != null) {
-                long monthlyListeners = monthlyListenersElement.getAsLong();
-                artist.setTotalViews(monthlyListeners);
-            }
+            artist.setTotalViews(jsonObject.get("totalViews").getAsLong());
 
-//            JsonArray songsArray = jsonObject.getAsJsonArray("songsList");
-//            List<Songs> songsList = new ArrayList<>();
-//
-//            if (songsArray != null) {
-//                for (JsonElement songElement : songsArray) {
-//                    Songs song = new Gson().fromJson(songElement, Songs.class);
-//                    songsList.add(song);
-//                }
-//            }
-//            artists.setSongsList(songsList);
             users = artist;
         }
         return users;

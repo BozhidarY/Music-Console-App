@@ -2,73 +2,25 @@
   "songs": [
     {
       "name": "song1",
-      "artistName": "Taylor",
+      "artistName": "sin1",
       "duration": "0:05",
-      "timesListened": 4
+      "timesListened": 1
     },
     {
       "name": "song2",
-      "artistName": "Taylor",
+      "artistName": "sin1",
       "duration": "0:05",
-      "timesListened": 3
+      "timesListened": 1
     },
     {
-      "name": "son3",
-      "artistName": "Taylor",
+      "name": "song3",
+      "artistName": "sin2",
       "duration": "0:05",
       "timesListened": 1
     },
     {
       "name": "song5",
-      "artistName": "Gaga",
-      "duration": "0:05",
-      "timesListened": 1
-    },
-    {
-      "name": "song6",
-      "artistName": "Taylor",
-      "duration": "0:05",
-      "timesListened": 3
-    },
-    {
-      "name": "Exit",
-      "artistName": "Taylor",
-      "duration": "0:05",
-      "timesListened": 2
-    },
-    {
-      "name": "Exit",
-      "artistName": "Singer2",
-      "duration": "0:05",
-      "timesListened": 0
-    },
-    {
-      "name": "song10",
-      "artistName": "Taylor",
-      "duration": "0:05",
-      "timesListened": 6
-    },
-    {
-      "name": "asd",
-      "artistName": "Taylor",
-      "duration": "0:05",
-      "timesListened": 8
-    },
-    {
-      "name": "Exit",
-      "artistName": "singer4",
-      "duration": "0:05",
-      "timesListened": 0
-    },
-    {
-      "name": "",
-      "artistName": "singer",
-      "duration": "0:05",
-      "timesListened": 0
-    },
-    {
-      "name": "song100",
-      "artistName": "singer11",
+      "artistName": "sin1",
       "duration": "0:05",
       "timesListened": 0
     }

@@ -1,17 +1,36 @@
 {
   "usersList": [
     {
+      "totalViews": 2,
+      "username": "sin1",
+      "password": "$2a$12$A8Wi2lLr91DxOaI71ohEhu6suGRSfE1IKH/5fC9ixgUafVhYYsZva",
+      "userType": "ARTIST"
+    },
+    {
+      "totalViews": 1,
+      "username": "sin2",
+      "password": "$2a$12$OTp5cd/9e/Ol96dE09a.0eBQFt0A3bT9i9TFtUWJg3e1NulgosFh6",
+      "userType": "ARTIST"
+    },
+    {
       "library": {
         "libraryPlaylists": [
           {
             "playlistName": "defaultPlaylist",
-            "songPlaylist": []
+            "songPlaylist": [
+              {
+                "name": "song3",
+                "artistName": "sin2",
+                "duration": "0:05",
+                "timesListened": 1
+              }
+            ]
           }
         ],
         "libraryName": "boj library"
       },
       "username": "boj",
-      "password": "$2a$12$1Mf5ctMc7WjaPwmbPksn1..CF7TrGARHM60KUjz2TmJ9MYekybNVq",
+      "password": "$2a$12$CbXFkkHhjfsdxIXsnmXYO.Ui1W4rw5r8S5rBVRm42lCVRdfMXHRhC",
       "userType": "CLIENT"
     }
   ]

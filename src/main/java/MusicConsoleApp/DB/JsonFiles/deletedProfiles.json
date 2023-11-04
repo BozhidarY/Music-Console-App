@@ -1,3 +1,46 @@
 {
-  "usersList": []
+  "usersList": [
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": [
+              {
+                "name": "song3",
+                "artistName": "sin2",
+                "duration": "0:05",
+                "timesListened": 1
+              }
+            ]
+          }
+        ],
+        "libraryName": "boj library"
+      },
+      "username": "boj",
+      "password": "$2a$12$CbXFkkHhjfsdxIXsnmXYO.Ui1W4rw5r8S5rBVRm42lCVRdfMXHRhC",
+      "userType": "CLIENT"
+    },
+    {
+      "library": {
+        "libraryPlaylists": [
+          {
+            "playlistName": "defaultPlaylist",
+            "songPlaylist": [
+              {
+                "name": "song3",
+                "artistName": "sin2",
+                "duration": "0:05",
+                "timesListened": 1
+              }
+            ]
+          }
+        ],
+        "libraryName": "ime library"
+      },
+      "username": "ime",
+      "password": "$2a$12$jt.bCJ.QMJ36kMQ7JtQ2k.RcJQDRmj0jFNJwpzoPgvvqwzdk9CIv2",
+      "userType": "CLIENT"
+    }
+  ]
 }

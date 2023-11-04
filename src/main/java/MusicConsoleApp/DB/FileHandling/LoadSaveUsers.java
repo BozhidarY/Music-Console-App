@@ -26,10 +26,9 @@ public class LoadSaveUsers {
                 .create();
     }
 
-    public UserDB loadUsers(String filePath) {
+    public UserDB loadUsersFromJson(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {
-            Type typeToken = new TypeToken<UserDB>() {
-            }.getType();
+            Type typeToken = new TypeToken<UserDB>() {}.getType();
             logger.info("Users have beed loaded from {}", filePath);
             return gson.fromJson(fileReader, typeToken);
         } catch (IOException e) {
@@ -37,12 +36,12 @@ public class LoadSaveUsers {
             System.out.println("THe filePath you provided is wrong. Fix it");
             filePath = scanner.nextLine();
             UserDB newUserDB;
-            newUserDB = loadUsers(filePath);
+            newUserDB = loadUsersFromJson(filePath);
             return newUserDB;
         }
     }
 
-    public void saveUsers(String filePath, UserDB userDB) {
+    public void saveUsersToJson(String filePath, UserDB userDB) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             gson.toJson(userDB, fileWriter);
             logger.info("Users have beed succesfully saved in {}", filePath);
@@ -50,7 +49,7 @@ public class LoadSaveUsers {
             logger.error("Failed to save in file {}", filePath);
             System.out.println("THe filePath you provided is wrong. Fix it");
             filePath = scanner.nextLine();
-            saveUsers(filePath, userDB);
+            saveUsersToJson(filePath, userDB);
         }
     }
 

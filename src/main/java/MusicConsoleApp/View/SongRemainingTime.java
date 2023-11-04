@@ -12,7 +12,7 @@ public class SongRemainingTime {
         return duration;
     }
 
-    public void stopwatch(Songs songs, Scanner scanner) {
+    public void visualizeRemainingTime(Songs songs, Scanner scanner) {
         int durationInSeconds = convertSongDuration(songs);
 
         long startTime = System.currentTimeMillis();

@@ -1,6 +1,5 @@
 package MusicConsoleApp.Models;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Users {
 
     private String username;
@@ -12,6 +11,7 @@ public abstract class Users {
         this.password = password;
 
     }
+
 
     public String getUsername() {
         return username;

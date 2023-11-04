@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class Client extends Users {
 
     private Library library;
-    private HashMap<String, Integer> favouriteArtist;
 
     public Client(String username, String password) {
         super(username, password);
@@ -13,7 +12,6 @@ public class Client extends Users {
         this.library = new Library(getUsername() + " library");
         library.getLibraryList().add(new Playlist("defaultPlaylist"));
     }
-
 
     public Library getLibrary() {
         return library;
@@ -26,6 +24,7 @@ public class Client extends Users {
     @Override
     public String toString() {
         return "Client{" +
+                super.toString() +
                 "library=" + library +
                 '}';
     }

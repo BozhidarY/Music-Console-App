@@ -1,9 +1,9 @@
 package MusicConsoleApp.Controller;
 
 
-import MusicConsoleApp.DB.SongData;
+import MusicConsoleApp.DB.SongDB;
 import MusicConsoleApp.DB.UserDB;
-import MusicConsoleApp.Exceptions.Validators;
+import MusicConsoleApp.Validation.Validators;
 import MusicConsoleApp.Models.Admin;
 import MusicConsoleApp.Models.Users;
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -12,12 +12,12 @@ public class SignMenuController {
     Validators validators = new Validators();
     private UserDB userDB;
     private UserDB deletedUsers;
-    private SongData songData;
+    private SongDB songDB;
 
-    public SignMenuController(UserDB userDB, UserDB deletedUsers, SongData songData) {
+    public SignMenuController(UserDB userDB, UserDB deletedUsers, SongDB songDB) {
         this.userDB = userDB;
         this.deletedUsers = deletedUsers;
-        this.songData = songData;
+        this.songDB = songDB;
     }
 
     public Users checkIfUserExists(String username, String password) {
@@ -42,8 +42,15 @@ public class SignMenuController {
         return true;
     }
 
-    public boolean validateUserCredentials(String username, String password) {
-        if (!validators.validateUsername(username) || !validators.validatePassword(password)) {
+    public boolean validateUserUsername(String username) {
+        if (!validators.validateUsername(username)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateUserPassword(String password) {
+        if (!validators.validatePassword(password)) {
             return false;
         }
         return true;
@@ -65,11 +72,11 @@ public class SignMenuController {
         this.deletedUsers = deletedUsers;
     }
 
-    public SongData getSongData() {
-        return songData;
+    public SongDB getSongData() {
+        return songDB;
     }
 
-    public void setSongData(SongData songData) {
-        this.songData = songData;
+    public void setSongData(SongDB songDB) {
+        this.songDB = songDB;
     }
 }

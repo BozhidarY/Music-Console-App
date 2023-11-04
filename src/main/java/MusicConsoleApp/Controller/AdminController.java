@@ -19,7 +19,16 @@ public class AdminController {
     }
 
 
-    public boolean dublicationCheck(String userName) {
+    public boolean isDublicateUsername(String userName) {
+        for (Users user : deletedUsers.getUsersList()) {
+            if (user.getUsername().equals(userName)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isDublicateUsernameDel(String userName) {
         for (Users user : userDB.getUsersList()) {
             if (user.getUsername().equals(userName)) {
                 return false;
@@ -28,11 +37,12 @@ public class AdminController {
         return true;
     }
 
-    public boolean deleteAccount(String userName) {
+    public boolean deleteUserAccount(String userName) {
         List<Users> removedAccounts = new ArrayList<>();
         for (Users user : userDB.getUsersList()) {
+            System.out.println(user);
             if (user.getUsername().equals(userName)) {
-                if (!dublicationCheck(userName)) {
+                if (!isDublicateUsername(userName)) {
                     return false;
                 } else {
                     deletedUsers.getUsersList().add(user);
@@ -40,18 +50,13 @@ public class AdminController {
                 }
             }
         }
-        if (removedAccounts.isEmpty()) {
-            return false;
-        } else {
-            userDB.getUsersList().removeAll(removedAccounts);
-            return true;
-        }
-
+        userDB.getUsersList().removeAll(removedAccounts);
+        return true;
     }
 
-    public boolean recoverAccount(String nameAcc) {
+    public boolean recoverUserAccount(String nameAcc) {
         for (Users user : deletedUsers.getUsersList()) {
-            if (nameAcc.equals(user.getUsername()) && dublicationCheck(nameAcc)) {
+            if (nameAcc.equals(user.getUsername()) && isDublicateUsernameDel(nameAcc)) {
                 userDB.getUsersList().add(user);
                 deletedUsers.getUsersList().remove(user);
                 return true;

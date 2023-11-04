@@ -1,6 +1,6 @@
 package MusicConsoleApp.Controller;
 
-import MusicConsoleApp.DB.SongData;
+import MusicConsoleApp.DB.SongDB;
 import MusicConsoleApp.DB.UserDB;
 import MusicConsoleApp.Models.*;
 
@@ -13,22 +13,21 @@ import java.util.stream.Collectors;
 public class ClientController {
     private Client client;
     private UserDB userDB;
-    private SongData songData;
+    private SongDB songDB;
 
-    public ClientController(Client client, UserDB userDB, SongData songData) {
+    public ClientController(Client client, UserDB userDB, SongDB songDB) {
         this.client = client;
         this.userDB = userDB;
-        this.songData = songData;
+        this.songDB = songDB;
     }
 
-    public List<Songs> searchMenu(String substring) {
-        return songData.getSongsList().stream()
+    public List<Songs> filterSongsBySubstring(String substring) {
+        return songDB.getSongsList().stream()
                 .filter(songs -> songs.getName().contains(substring))
                 .collect(Collectors.toList());
     }
 
-
-    public Songs SongByChoice(List<Songs> filteredSongs, String songChoice) {
+    public Songs getSongByChoice(List<Songs> filteredSongs, String songChoice) {
         for (Songs song : filteredSongs) {
             if (song.getName().equals(songChoice)) {
                 return song;
@@ -38,28 +37,28 @@ public class ClientController {
     }
 
 
-    public Songs randomSong() {
+    public Songs getRandomSong() {
         Random random = new Random();
-        int randomIndex = random.nextInt(songData.getSongsList().size());
-        Songs currentSong = songData.getSongsList().get(randomIndex);
+        int randomIndex = random.nextInt(songDB.getSongsList().size());
+        Songs currentSong = songDB.getSongsList().get(randomIndex);
         return currentSong;
     }
 
-    public void artistDataChange() {
+    public void changeArtistDataViews() {
         for (Users user : userDB.getUsersList()) {
             if (user instanceof Artist artist) {
                 long counter = 0;
-                for (Songs song : songData.getSongsList()) {
+                for (Songs song : songDB.getSongsList()) {
                     if (artist.getUsername().equals(song.getArtistName())) {
                         counter += song.getTimesListened();
-                        artist.setTotalViews(counter);
                     }
                 }
+                artist.setTotalViews(counter);
             }
         }
     }
 
-    public Playlist searchPlaylist(String playlistChoice) {
+    public Playlist searchPlaylistFromLibrary(String playlistChoice) {
         for (Playlist playlist : client.getLibrary().getLibraryList()) {
             if (playlistChoice.equals(playlist.getPlaylistName())) {
                 return playlist;
@@ -98,7 +97,7 @@ public class ClientController {
     }
 
     public boolean addSong(Playlist playlist, String songName) {
-        for (Songs song : songData.getSongsList()) {
+        for (Songs song : songDB.getSongsList()) {
             if (song.getName().equals(songName)) {
                 playlist.getSongPlaylist().add(song);
                 return true;

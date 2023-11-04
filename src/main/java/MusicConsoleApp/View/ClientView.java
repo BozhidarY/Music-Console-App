@@ -3,7 +3,7 @@ package MusicConsoleApp.View;
 import MusicConsoleApp.Controller.ClientController;
 
 import MusicConsoleApp.DB.FileHandling.LoadSaveSongs;
-import MusicConsoleApp.DB.SongData;
+import MusicConsoleApp.DB.SongDB;
 import MusicConsoleApp.Models.Constants;
 import MusicConsoleApp.Models.Playlist;
 import MusicConsoleApp.Models.Songs;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class ClientView {
     Scanner scanner = new Scanner(System.in);
     LoadSaveSongs loadSaveSongs = new LoadSaveSongs();
-    SongData songData = loadSaveSongs.loadFromFile(Constants.SONG_JSON_PATH);
+    SongDB songDB = loadSaveSongs.loadSongFromJson(Constants.SONG_JSON_PATH);
     SongRemainingTime songRemainingTime = new SongRemainingTime();
     private ClientController clientController;
 
@@ -40,20 +40,20 @@ public class ClientView {
                     String listenChoice = scanner.nextLine();
                     switch (listenChoice.toUpperCase()) {
                         case "SEARCH" -> {
-                            List<Songs> filteredSongs = caseSearchInSongDatabase();
+                            List<Songs> filteredSongs = searchForSongDialog();
                             if (filteredSongs != null) {
-                                listenSong(filteredSongs);
+                                listenChoosenSongDialog(filteredSongs);
                             }
                         }
                         case "RANDOM" -> {
-                            Songs song = clientController.randomSong();
+                            Songs song = clientController.getRandomSong();
                             System.out.println("Now playing: " + song);
                             visualizeSongRemainingTime(song);
                         }
                         case "PLAYLIST" -> {
-                            Playlist playlist = checkIfPlaylistExists();
+                            Playlist playlist = checkIfPlaylistExistsDialog();
                             if (playlist != null) {
-                                checkIfSongInPlaylistExists(playlist);
+                                checkIfSongInPlaylistExistsDialog(playlist);
                             }
                         }
                         default -> {
@@ -73,18 +73,18 @@ public class ClientView {
                             clientController.addPlaylist(playlistName);
                         }
                         case "DELETEPLAYLIST" -> {
-                            deletePlaylist();
+                            deletePlaylistDialog();
                         }
                         case "ADDSONG" -> {
-                            Playlist playlist = checkIfPlaylistExists();
+                            Playlist playlist = checkIfPlaylistExistsDialog();
                             if (playlist != null) {
-                                addSongInPlaylist(playlist);
+                                addSongInPlaylistDialog(playlist);
                             }
                         }
                         case "DELETESONG" -> {
-                            Playlist playlist = checkIfPlaylistExists();
+                            Playlist playlist = checkIfPlaylistExistsDialog();
                             if (playlist != null) {
-                                deleteSong(playlist);
+                                deleteSongDialog(playlist);
                             }
                         }
                         default -> {
@@ -96,7 +96,7 @@ public class ClientView {
                     System.out.println("If you have 2 accounts you can import the library from your other account to this account" +
                             "You only need an username and password of the other account" +
                             "Note: You can have only one library, so if you want to import, your current library will be overwritten");
-                    importLibrary();
+                    importLibraryDialog();
                 }
                 default -> {
                     System.out.println("Invalid Input");
@@ -115,18 +115,18 @@ public class ClientView {
                     }
                 }
             }
-            clientController.artistDataChange();
-            loadSaveSongs.saveSongs(Constants.SONG_JSON_PATH, songData);
+            clientController.changeArtistDataViews();
+            loadSaveSongs.saveSongsToJson(Constants.SONG_JSON_PATH, songDB);
             System.out.println("Choose a new mode or exit the programm(Listen, Edit, Import, Exit)");
             choice = scanner.nextLine();
         }
     }
 
-    public List<Songs> caseSearchInSongDatabase() {
+    public List<Songs> searchForSongDialog() {
         System.out.println("Search a song to listen to:");
         System.out.print("Search Bar: ");
         String searchWord = scanner.nextLine();
-        List<Songs> filteredSongs = clientController.searchMenu(searchWord);
+        List<Songs> filteredSongs = clientController.filterSongsBySubstring(searchWord);
         for (Songs song : filteredSongs) {
             System.out.println(song);
         }
@@ -134,7 +134,7 @@ public class ClientView {
             System.out.println("No songs with this name. Do you want to try again? ");
             String choice = scanner.nextLine();
             if (choice.equals("Y")) {
-                caseSearchInSongDatabase();
+                searchForSongDialog();
             } else {
                 return null;
             }
@@ -143,33 +143,33 @@ public class ClientView {
 
     }
 
-    public void listenSong(List<Songs> filteredSongs) {
+    public void listenChoosenSongDialog(List<Songs> filteredSongs) {
         System.out.println("Choose which song to play");
         String choiceSong = scanner.nextLine();
-        Songs song = clientController.SongByChoice(filteredSongs, choiceSong);
+        Songs song = clientController.getSongByChoice(filteredSongs, choiceSong);
         if (song == null) {
             System.out.println("Wrong song name. Try again");
-            listenSong(filteredSongs);
+            listenChoosenSongDialog(filteredSongs);
         } else {
             visualizeSongRemainingTime(song);
         }
     }
 
-    public Playlist checkIfPlaylistExists() {
+    public Playlist checkIfPlaylistExistsDialog() {
         System.out.println("Search playlist");
         String playlistChoice = scanner.nextLine();
-        Playlist choosenPlaylist = clientController.searchPlaylist(playlistChoice);
+        Playlist choosenPlaylist = clientController.searchPlaylistFromLibrary(playlistChoice);
         if (choosenPlaylist == null) {
             System.out.println("No playlist with that name. Do you want to try again");
             String choice = scanner.nextLine();
             if (choice.equals("Y")) {
-                checkIfPlaylistExists();
+                checkIfPlaylistExistsDialog();
             }
         }
         return choosenPlaylist;
     }
 
-    public void checkIfSongInPlaylistExists(Playlist choosenPlaylist) {
+    public void checkIfSongInPlaylistExistsDialog(Playlist choosenPlaylist) {
         if (choosenPlaylist.getSongPlaylist().isEmpty()) {
             System.out.println("No added songs in this playlist");
         } else {
@@ -178,14 +178,14 @@ public class ClientView {
             Songs song = clientController.searchSongInPlaylist(choosenPlaylist, songChoice);
             if (song == null) {
                 System.out.println("Wrong name. Try again");
-                checkIfSongInPlaylistExists(choosenPlaylist);
+                checkIfSongInPlaylistExistsDialog(choosenPlaylist);
             } else {
                 visualizeSongRemainingTime(song);
             }
         }
     }
 
-    public void deletePlaylist() {
+    public void deletePlaylistDialog() {
         System.out.println("Which playlist to delete");
         String playlistName = scanner.nextLine();
         if (clientController.deletePlaylist(playlistName)) {
@@ -194,12 +194,12 @@ public class ClientView {
             System.out.println("No playlist found. Try again.");
             String choice = scanner.nextLine();
             if (choice.equals("Y")) {
-                deletePlaylist();
+                deletePlaylistDialog();
             }
         }
     }
 
-    public void addSongInPlaylist(Playlist choosenPlaylist) {
+    public void addSongInPlaylistDialog(Playlist choosenPlaylist) {
         System.out.println("Which song to add");
         String songChoice = scanner.nextLine();
         if (clientController.addSong(choosenPlaylist, songChoice)) {
@@ -208,33 +208,33 @@ public class ClientView {
             System.out.println("No such song. Try again.");
             String choice = scanner.nextLine();
             if (choice.equals("Y")) {
-                addSongInPlaylist(choosenPlaylist);
+                addSongInPlaylistDialog(choosenPlaylist);
             }
         }
     }
 
-    public void deleteSong(Playlist choosenPlaylist) {
+    public void deleteSongDialog(Playlist choosenPlaylist) {
         System.out.println("Which song to delete");
         String songChoice = scanner.nextLine();
         if (!clientController.deleteSong(choosenPlaylist, songChoice)) {
             System.out.println("No songs with that name found. Try again?");
             String choice = scanner.nextLine();
             if (choice.equals("Y")) {
-                deleteSong(choosenPlaylist);
+                deleteSongDialog(choosenPlaylist);
             }
         } else {
             System.out.println("Success");
         }
     }
 
-    public void importLibrary() {
+    public void importLibraryDialog() {
         System.out.println("Enter username");
         String username = scanner.nextLine();
         if (!clientController.importLibrary(username)) {
             System.out.println("No user with that name found. Do you want to try again?");
             String choice = scanner.nextLine();
             if (choice.equals("Y")) {
-                importLibrary();
+                importLibraryDialog();
             }
         } else {
             System.out.println("Success");
@@ -242,7 +242,7 @@ public class ClientView {
     }
 
     public void visualizeSongRemainingTime(Songs song) {
-        songRemainingTime.stopwatch(song, scanner);
+        songRemainingTime.visualizeRemainingTime(song, scanner);
         song.setTimesListened(song.getTimesListened() + 1);
     }
 
